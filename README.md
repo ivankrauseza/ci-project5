@@ -25,3 +25,6 @@ INSTALLED_APPS = [
 
 ### Environment Variables and Gitignore
 Create .gitignore, and add 'env.py' to the list. 
+
+### Connect to AWS RDS
+Setup aws rds database and connection to run initial migrations. Then remove default sqlite file.
