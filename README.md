@@ -22,3 +22,6 @@ INSTALLED_APPS = [
     'shop',
 ]
 ```
+
+### Environment Variables and Gitignore
+Create .gitignore, and add 'env.py' to the list. 
