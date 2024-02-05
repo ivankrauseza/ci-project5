@@ -33,3 +33,6 @@ Setup aws rds database and connection to run initial migrations. Then remove def
 ```
 python manage.py createsuperuser
 ```
+
+### Create initial templates
+Setup templates/base.html, and shop/templates/shop_index.html with basic info to test.
