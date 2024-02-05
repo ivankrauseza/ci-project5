@@ -36,3 +36,10 @@ python manage.py createsuperuser
 
 ### Create initial templates
 Setup templates/base.html, and shop/templates/shop_index.html with basic info to test.
+
+
+### Include 3rd-Party Packages
+- Bootstrap
+- Font Awesome
+- Jquery & JqueryUI
+- PopperJS
