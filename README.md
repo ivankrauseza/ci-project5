@@ -43,3 +43,12 @@ Setup templates/base.html, and shop/templates/shop_index.html with basic info to
 - Font Awesome
 - Jquery & JqueryUI
 - PopperJS
+
+
+### Create the Shop Models
+- Product
+- Collection
+- Files
+- Basket
+- Order
+- Order Lines (Linked to Order)
