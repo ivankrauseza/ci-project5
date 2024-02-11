@@ -3,6 +3,7 @@ Code Institute Diploma in Full Stack Software Development - Project 5
 
 ## Contents
 - [Setup](#setup)
+- [Functionality](#functionality)
 
 ## Setup
 ### Clone Github Repo
@@ -52,3 +53,27 @@ Setup templates/base.html, and shop/templates/shop_index.html with basic info to
 - Basket
 - Order
 - Order Lines (Linked to Order)
+
+## Functionality
+### Shop
+- View all products
+- View products by collection
+- Search products
+- Product detail
+- Basket
+- Checkout
+
+### Account
+- Update Account information
+- View order history and detail
+- Delete Account
+
+### Admin Dashboard
+- CRUD Products
+- View All orders
+
+### Pages
+- About us
+- Terms and Conditions
+- Contact Us
+- Privacy Policy
