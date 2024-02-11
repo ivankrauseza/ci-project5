@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <small>
+                <a href="{% url 'db_products' %}">
+                    Back to Product List
+                </a>
+            </small>
+            <h1>Edit Product</h1>
+
+            <p>SKU: {{ product.sku }}</p>
+            <form method="post" action="{% url 'db_product_edit' sku=product.sku %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Save Changes</button>
+            </form>
+            <p>Created: {{ product.created }}</p>
+            <p>Updated: {{ product.updated }}</p>
+            <hr>
+            <ul>
+                <li>Save as stripe product?</li>
+                <li>If blocked, do not allow unblock unless ALL required fields are completed</li>
+                <li>Blocked toggle</li>
+                <li>Add image upload functionality</li>
+            </ul>
+            <hr>
+            <!-- Delete button with confirmation prompt -->
+            <form method="post" action="{% url 'db_product_delete' pk=product.pk %}" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                {% csrf_token %}
+                <button type="submit">Delete Product</button>
+            </form>
+            <hr>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+    console.log('test');
+</script>
+{% endblock postloadjs %}

@@ -18,7 +18,7 @@
 </head>
 <body>
     
-    <header class="container-fluid">
+    <header class="container-fluid p-3">
         <div class="row">
             <div class="col-12">
                 header
@@ -26,7 +26,132 @@
         </div>
     </header>
 
-    <main class="conatiner-fluid">
+    <nav class="container-fluid p-3">
+        <div class="row">
+            <div class="col-12">
+                <ul>
+                    <li>
+                        <a href="{% url 'shop_index' %}">
+                            <strong>
+                                Shop
+                            </strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'shop_collection' %}">
+                            Collections
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'shop_search' %}">
+                            Search
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'shop_basket' %}">
+                            Basket
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'shop_checkout' %}">
+                            Checkout
+                        </a>
+                    </li>
+                    <li>Product Detail</li>
+                </ul>
+                <ul>
+                    <li>
+                        <a href="{% url 'account_index' %}">
+                            <strong>
+                                Account (logged in Customer)
+                            </strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'account_update' %}">
+                            Update Account
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'account_delete' %}">
+                            Delete Account
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'account_orders' %}">
+                            View Orders
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="{% url 'account_order_detail' %}">
+                                    Order Detail
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <a href="{% url 'db_index' %}">
+                            <strong>
+                                Dashboard (logged in Admin)
+                            </strong>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'db_products' %}">
+                            List of products
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="{% url 'db_product_create' %}">
+                                    Create Product
+                                </a>
+                            </li>
+                            <li>
+                                Function: Edit Product
+                            </li>
+                            <li>
+                                <a href="{% url 'db_product_delete' %}">
+                                    Delete Product (cascade - basket)
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="{% url 'db_orders' %}">
+                            View Orders
+                        </a>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <a href="{% url 'about' %}">
+                            About Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'terms' %}">
+                            Terms and Conditions
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'contact' %}">
+                            Contact Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'privacy' %}">
+                            Privacy Policy
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+    </nav>
+
+    <main class="conatiner-fluid p-3">
         <div class="row">
             <div class="col-12">
                 {% block content %}{% endblock %}
@@ -34,7 +159,8 @@
         </div>
     </main>
 
-    <footer class="container-fluid">
+    <footer class="container-fluid p-3">
+        <hr>
         <div class="row">
             <div class="col-12">
                 footer

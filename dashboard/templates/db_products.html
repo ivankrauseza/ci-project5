@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Dashboard</h1>
+            <h2>Products</h2>
+            
+            <!-- Create Product -->
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Create Product</button>
+            </form>
+            
+            <hr>
+
+            <!-- List of products -->
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th>SKU</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <!-- Add more columns as needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                        <tr>
+                            <td><a href="{% url 'db_product_edit' sku=product.sku %}">{{ product.sku }}</a></td>
+                            <td>{{ product.name }}</td>
+                            <td>&euro; {{ product.price }}</td>
+                            <!-- Add more columns as needed -->
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+    console.log('test');
+</script>
+{% endblock postloadjs %}
