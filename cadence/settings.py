@@ -31,6 +31,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'shop',
     'dashboard',
     'customers',
@@ -45,6 +48,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Add the account middleware:
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'cadence.urls'
@@ -59,7 +64,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',
+                'django.template.context_processors.request', #allauth needs this
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -91,6 +96,35 @@ DATABASES = {
         'PORT': os.environ.get('AWS_PORT'),
     }
 }
+
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+ACCOUNT_ADAPTER = "allauth.account.adapter.DefaultAccountAdapter"
+ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
+LOGIN_REDIRECT_URL = "/"
+# LOGIN_REDIRECT_URL = "clr"
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_CHANGE_EMAIL = True
+ACCOUNT_CONFIRM_EMAIL_ON_GET = False
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = None
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+# SIGNUP
+ACCOUNT_SIGNUP_REDIRECT_URL = '/account/update/'
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = False
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
+ACCOUNT_UNIQUE_EMAIL = True
+# PASSWORD
+ACCOUNT_PASSWORD_CHANGE_REDIRECT_URL = '/account/'
 
 
 # Password validation

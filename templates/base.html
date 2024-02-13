@@ -20,8 +20,24 @@
     
     <header class="container-fluid p-3">
         <div class="row">
-            <div class="col-12">
+            <div class="col-6 text-start">
                 header
+            </div>
+            <div class="col-6 text-end">
+                {% if user.is_authenticated %}
+                    <p>Welcome, {{ user.username }}!</p>
+                    <form method="post" action="{% url 'account_logout' %}">
+                        {% csrf_token %}
+                        <button type="submit">Logout</button>
+                    </form>
+                    <!-- Your content for logged-in users goes here -->
+                {% else %}
+                    <p><a href="{% url 'account_login' %}">Login</a></p>
+                    <!-- Add more social login links as needed -->
+                {% endif %}
+            </div>
+            <div class="col-12">
+                <hr>
             </div>
         </div>
     </header>
@@ -92,6 +108,37 @@
                 </ul>
                 <ul>
                     <li>
+                        <a href="{% url 'about' %}">
+                            About Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'terms' %}">
+                            Terms and Conditions
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'contact' %}">
+                            Contact Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'privacy' %}">
+                            Privacy Policy
+                        </a>
+                    </li>
+                </ul>
+                {% if user.is_authenticated and user.is_staff %}
+                    {% if user.is_superuser %}
+                        <p>SUPERUSER:</p>
+                    {% else %}
+                        <p>NORMAL STAFF</p>
+                    {% endif %}
+                {% else %}
+                    <p>CUSTOMER</p>
+                {% endif %}
+                <ul>
+                    <li>
                         <a href="{% url 'db_index' %}">
                             <strong>
                                 Dashboard (logged in Admin)
@@ -121,28 +168,6 @@
                     <li>
                         <a href="{% url 'db_orders' %}">
                             View Orders
-                        </a>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
-                        <a href="{% url 'about' %}">
-                            About Us
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'terms' %}">
-                            Terms and Conditions
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'contact' %}">
-                            Contact Us
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'privacy' %}">
-                            Privacy Policy
                         </a>
                     </li>
                 </ul>

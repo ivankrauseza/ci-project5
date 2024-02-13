@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Sign Up{% endblock %}
+
+{% load allauth i18n socialaccount %}
+{% block head_title %}
+    {% trans "Signup" %}
+{% endblock head_title %}
+{% block content %}
+    <div class="container-sm py-5">
+        <div class="row">
+            <div class="col-sm-4">
+                {% element h1 %}
+                    {% trans "Sign Up" %}
+                {% endelement %}
+
+                <p>
+                    {% blocktrans %}Already have an account? <a href="{{ login_url }}">Click here to login</a>.{% endblocktrans %}
+                </p>
+                <div class="border p-3 rounded formDisplay form-floating">
+
+                    {% url 'account_signup' as action_url %}
+                    
+                    {% element form form=form method="post" action=action_url tags="entrance,signup" %}
+                        {% slot body %}
+                            {% csrf_token %}
+                            {% element fields form=form unlabeled=True %}
+                            {% endelement %}
+                            {% if redirect_field_value %}
+                                <input type="hidden"
+                                    name="{{ redirect_field_name }}"
+                                    value="{{ redirect_field_value }}">
+                            {% endif %}
+                        {% endslot %}
+                        {% slot actions %}
+                            {% element button tags="prominent,signup" type="submit" %}
+                                {% trans "Sign Up" %}
+                            {% endelement %}
+                        {% endslot %}
+                    {% endelement %}
+                </div>
+
+                {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+
+            </div>
+        </div>
+    </div>
+
+    {% endblock content %}
+
+    {% block postloadjs %}
+        <script>
+            $(document).ready(function() {
+                var inputUsername = $("input[name='username']");
+                inputUsername.addClass("form-control");
+
+                var inputEmail = $("input[name='email']");
+                inputEmail.addClass("form-control");
+
+                var inputPassword1 = $("input[name='password1']");
+                inputPassword1.addClass("form-control");
+
+                var inputPassword2 = $("input[name='password2']");
+                inputPassword2.addClass("form-control");
+            });
+            var label = $("label");
+            label.css("font-size","11px");
+            label.css("color","#999");
+        </script>
+    {% endblock postloadjs %}
+
+
+    
