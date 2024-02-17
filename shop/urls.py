@@ -9,4 +9,7 @@ urlpatterns = [
     path('basket/', views.ShopBasket, name='shop_basket'),
     path('checkout/', views.ShopCheckout, name='shop_checkout'),
     path('orders/', views.ShopOrder, name='shop_order'),
+    path('products/<str:sku>/', views.ProductDetail, name='product_detail'),
+    path('collection/', views.ShopCollection, name='shop_collection'),
+    path('collection/<slug:collection_slug>/', views.ShopCollection, name='shop_collection'),
 ]

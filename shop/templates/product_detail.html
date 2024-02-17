@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ product.name }}
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-12 pb-5">    
+            <small>
+                <a href="{% url 'shop_index' %}">All Products</a> &gt; <strong>{{ collection.catname }}</strong>
+            </small>
+        </div>
+
+        <div class="col-sm-12 col-md-6">
+            Image
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <h1>{{ product.name }}</h1>
+            <p>SKU: {{ product.sku }}</p>
+            <p>Short Description: {{ product.blurb }}</p>
+            <p>Long Description: {{ product.desc }}</p>
+            <p>&euro;  {{ product.price }}</p>
+            <ul>
+                <li>Category: {{ product.category }}</li>
+                <li>Stock: {{ product.stock }}</li>
+            </ul>
+            {% if user.is_authenticated %}
+            
+            <p>Quantity form here</p>
+                <button>Add to cart</button>
+            {% else %}
+            <hr>
+                <p>Please <a href="{% url 'account_login' %}">log in</a> to add this product to your cart.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+    console.log('test');
+</script>
+{% endblock postloadjs %}

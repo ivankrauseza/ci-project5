@@ -1,0 +1,62 @@
+
+<div class="container-fluid">
+    <div class="row">
+        
+        {% if product_items %}
+        <div class="col-6 text-start my-auto">
+            <small>
+                {{ product_count }} Products found.
+            </small>
+        </div>
+        <div class="col-6 text-end my-auto">
+            <div class="dropdown">
+                <button class="btn btn-sm  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Order by
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="?order_by=asc">Price (Asc)</a></li>
+                    <li><a class="dropdown-item" href="?order_by=desc">Price (Desc)</a></li>
+                </ul>
+              </div>
+        </div>
+        <div class="col-12">
+            <hr>
+        </div>
+        
+        <!-- Display products here -->
+        {% for product in product_items %}
+            <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
+                <a href="{% url 'product_detail' sku=product.sku %}">
+                    <div class="card d-flex flex-column" style="height: 100%;">
+                        <img src="https://craftypixels.com/placeholder-image/1024x1024/cccccc/0011ff&text=placeholder+image" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <small class="card-text">
+                                <sub>
+                                    {{ product.sku }}
+                                </sub>
+                                <br>
+                                <strong>
+                                    {% if product.name %}
+                                        {{ product.name }}
+                                    {% else %}
+                                        No Name Available
+                                    {% endif %}
+                                </strong>
+                            </small>
+                        </div>
+                        <div class="card-footer">
+                            &euro; {{ product.price }}
+                        </div>
+                      
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+        {% else %}
+        <!-- Display a message when no products are found -->
+        <p>No products found for this collection.</p>
+        {% endif %}
+
+        
+    </div>
+</div>

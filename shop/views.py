@@ -1,14 +1,35 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from .models import Product, Collection
 
 
 # Shop index :
 def ShopIndex(request):
-    return render(request, 'shop_index.html')
+    products = Product.objects.all()
+
+    # Dictionary of objects :
+    context = {
+        'products': products,
+    }
+
+    return render(request, 'shop_index.html', context)
+
+
+# Shop detail :
+def ProductDetail(request, sku):
+    product = get_object_or_404(Product, sku=sku)
+
+    # Dictionary of objects :
+    context = {
+        'product': product,
+    }
+
+    return render(request, 'product_detail.html', context)
 
 
 # Shop collection :
-def ShopCollection(request):
-    return render(request, 'shop_collection.html')
+def ShopCollection(request, collection_slug=None):
+    collection = get_object_or_404(Collection, slug=collection_slug)
+    return render(request, 'shop_collection.html', {'collection': collection})
 
 
 # Shop search :

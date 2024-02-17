@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %} | Cadence Sport</title>
+    <title>{% block title %}{% endblock %} | Cadence Tools</title>
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/0c303f45d6.js" crossorigin="anonymous"></script>
     <!-- Bootstrap 5.3.2 -->
@@ -16,31 +16,54 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css">
 </head>
-<body>
+<body class="bg-secondary-subtle">
     
-    <header class="container-fluid p-3">
-        <div class="row">
-            <div class="col-6 text-start">
-                header
+    <header class="container-fluid">
+        <div class="row bg-danger p-3">
+            <div class="col-6 text-start my-auto">
+                <a href="{% url 'shop_index' %}">
+                    <img src="https://bmie23a.s3.eu-west-1.amazonaws.com/bmdb/Media/logo_cadence.png" height="16" alt="Logo">
+                </a>
             </div>
-            <div class="col-6 text-end">
+            <div class="col-6 text-end my-auto">
                 {% if user.is_authenticated %}
-                    <p>Welcome, {{ user.username }}!</p>
-                    <form method="post" action="{% url 'account_logout' %}">
-                        {% csrf_token %}
-                        <button type="submit">Logout</button>
-                    </form>
-                    <!-- Your content for logged-in users goes here -->
+                    <button 
+                    class="btn text-white" 
+                    type="button" 
+                    data-bs-toggle="offcanvas" 
+                    data-bs-target="#offcanvasRight" 
+                    aria-controls="offcanvasRight">
+                        <i class="fa-solid fa-user"></i>
+                    </button>
                 {% else %}
-                    <p><a href="{% url 'account_login' %}">Login</a></p>
+                    <a class="btn text-white" href="{% url 'account_login' %}">
+                        <small class="px-1">Login</small> <i class="fa-regular fa-user"></i>
+                    </a>
                     <!-- Add more social login links as needed -->
                 {% endif %}
-            </div>
-            <div class="col-12">
-                <hr>
+                <a href="{% url 'shop_basket' %}" class="btn text-white">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
             </div>
         </div>
     </header>
+
+
+    <main class="container-fluid p-sm-3 p-md-5 bg-white">
+        <div class="row">
+            <div class="col-12">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </main>
+
+    <footer class="container-fluid p-3">
+        <div class="row">
+            <div class="col-12">
+                footer
+            </div>
+        </div>
+    </footer>
 
     <nav class="container-fluid p-3">
         <div class="row">
@@ -77,37 +100,6 @@
                 </ul>
                 <ul>
                     <li>
-                        <a href="{% url 'account_index' %}">
-                            <strong>
-                                Account (logged in Customer)
-                            </strong>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'account_update' %}">
-                            Update Account
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'account_delete' %}">
-                            Delete Account
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'account_orders' %}">
-                            View Orders
-                        </a>
-                        <ul>
-                            <li>
-                                <a href="{% url 'account_order_detail' %}">
-                                    Order Detail
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
                         <a href="{% url 'about' %}">
                             About Us
                         </a>
@@ -129,69 +121,83 @@
                     </li>
                 </ul>
                 {% if user.is_authenticated and user.is_staff %}
+                    <ul>
+                        <li>
+                            <a href="{% url 'db_index' %}">
+                                <strong>
+                                    Dashboard (logged in Admin)
+                                </strong>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'db_products' %}">
+                                List of products
+                            </a>
+                            <ul>
+                                <li>
+                                    <a href="{% url 'db_product_create' %}">
+                                        Create Product
+                                    </a>
+                                </li>
+                                <li>
+                                    Function: Edit Product
+                                </li>
+                                <li>
+                                    <a href="{% url 'db_product_delete' %}">
+                                        Delete Product (cascade - basket)
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="{% url 'db_orders' %}">
+                                View Orders
+                            </a>
+                        </li>
+                    </ul>
                     {% if user.is_superuser %}
                         <p>SUPERUSER:</p>
                     {% else %}
                         <p>NORMAL STAFF</p>
                     {% endif %}
                 {% else %}
-                    <p>CUSTOMER</p>
                 {% endif %}
-                <ul>
-                    <li>
-                        <a href="{% url 'db_index' %}">
-                            <strong>
-                                Dashboard (logged in Admin)
-                            </strong>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'db_products' %}">
-                            List of products
-                        </a>
-                        <ul>
-                            <li>
-                                <a href="{% url 'db_product_create' %}">
-                                    Create Product
-                                </a>
-                            </li>
-                            <li>
-                                Function: Edit Product
-                            </li>
-                            <li>
-                                <a href="{% url 'db_product_delete' %}">
-                                    Delete Product (cascade - basket)
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="{% url 'db_orders' %}">
-                            View Orders
-                        </a>
-                    </li>
-                </ul>
             </div>
         </div>
         <hr>
     </nav>
+    
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">Account Settings</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        {% if user.is_authenticated %}
+            <ul>
+                <li>
+                    <a href="{% url 'account_index' %}">
+                        <strong>
+                            My Account
+                        </strong>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'account_orders' %}">
+                        My Orders
+                    </a>
+                </li>
+            </ul>
 
-    <main class="conatiner-fluid p-3">
-        <div class="row">
-            <div class="col-12">
-                {% block content %}{% endblock %}
-            </div>
-        </div>
-    </main>
+            <hr>
 
-    <footer class="container-fluid p-3">
-        <hr>
-        <div class="row">
-            <div class="col-12">
-                footer
-            </div>
-        </div>
-    </footer>
+            <form method="post" action="{% url 'account_logout' %}">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        {% endif %}
+    </div>
+    </div>
 
     {% block postloadjs %}{% endblock postloadjs %}
 

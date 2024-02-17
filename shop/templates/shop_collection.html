@@ -3,10 +3,24 @@
 {% block title %}Shop{% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-12">
-            <h1>Collections</h1>
+
+        <div class="col-12 pb-5">    
+            <small>
+                <a href="{% url 'shop_index' %}">All Products</a> &gt; <strong>{{ collection.catname }}</strong>
+            </small>
+        </div>
+        
+        <div class="col-2">
+            {% load menu_tags %}
+            {% menu_items %}
+
+        </div>
+        
+        <div class="col-10">
+            {% load product_tags %}
+            {% product_items collection_slug=collection.slug order_by=request.GET.order_by %}
         </div>
     </div>
 </div>

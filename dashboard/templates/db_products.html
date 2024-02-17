@@ -32,7 +32,7 @@
                     {% for product in products %}
                         <tr>
                             <td><a href="{% url 'db_product_edit' sku=product.sku %}">{{ product.sku }}</a></td>
-                            <td>{{ product.name }}</td>
+                            <td>{{ product.name }} ({{ product.blocked }})</td>
                             <td>&euro; {{ product.price }}</td>
                             <!-- Add more columns as needed -->
                         </tr>

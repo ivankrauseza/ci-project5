@@ -6,8 +6,23 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h1>Account</h1>
-            <h2>Orders</h2>
+            
+            <h1>
+                <a href="{% url 'account_index' %}">
+                    Account
+                </a>
+            </h1>
+
+            <h2>My Orders</h2>
+
+            {% if user.is_authenticated %}
+                <a href="{% url 'account_order_detail' %}">
+                    Order Detail
+                </a>
+            {% else %}
+                <p>Please <a href="{% url 'login' %}">log in</a> to access this page.</p>
+            {% endif %}
+
         </div>
     </div>
 </div>
