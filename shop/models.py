@@ -82,7 +82,7 @@ class Basket(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s Basket Item {self.id}"
-    
+
 
 # Orders :
 class Order(models.Model):

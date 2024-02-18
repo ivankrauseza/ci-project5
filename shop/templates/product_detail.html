@@ -10,7 +10,7 @@
 
         <div class="col-12 pb-5">    
             <small>
-                <a href="{% url 'shop_index' %}">All Products</a> &gt; <strong>{{ collection.catname }}</strong>
+                <a href="{% url 'shop_index' %}">All Products </a> &gt; {{ product.category }}
             </small>
         </div>
 
@@ -18,23 +18,46 @@
             Image
         </div>
         <div class="col-sm-12 col-md-6">
+            <p>{{ product.brand }}</p>
             <h1>{{ product.name }}</h1>
-            <p>SKU: {{ product.sku }}</p>
-            <p>Short Description: {{ product.blurb }}</p>
-            <p>Long Description: {{ product.desc }}</p>
-            <p>&euro;  {{ product.price }}</p>
-            <ul>
-                <li>Category: {{ product.category }}</li>
-                <li>Stock: {{ product.stock }}</li>
-            </ul>
+            <p class="text-secondary pb-3"><small>SKU: <strong>{{ product.sku }}</strong></small></p>
+            <p>{{ product.blurb }}</p>
+            <h3 class="text-danger">
+                &euro;  {{ product.price }}
+            </h3>
+            <p class="text-secondary">
+                <strong>Stock: {{ product.stock }} Available</strong>
+            </p>
+
             {% if user.is_authenticated %}
-            
-            <p>Quantity form here</p>
-                <button>Add to cart</button>
+                {% if product_in_basket %}
+                <p class="text-success"><i class="fa-solid fa-check"></i> This product is in your <a href="{% url 'shop_basket' %}">basket</a>.</p>
+                {% else %}
+                <form method="post" action="{% url 'product_detail' sku=product.sku %}">
+                    {% csrf_token %}
+                    <div class="row g-1">
+                        <div class="col-1 text-center no-gutters">
+                            <button class="btn btn-light w-100" type="button" onclick="decrement()">&minus;</button>
+                        </div>
+                        <div class="col-2 text-center">
+                            {{ form.as_p }}
+                        </div>
+                        <div class="col-1 text-center">
+                            <button class="btn btn-light w-100" type="button" onclick="increment()">&plus;</button>
+                        </div>
+                        <div class="col-8 text-left">
+                            <button class="btn btn-primary" type="submit">Add to Basket</button>
+                        </div>
+                    </div>
+                </form>
+                {% endif %}
             {% else %}
             <hr>
                 <p>Please <a href="{% url 'account_login' %}">log in</a> to add this product to your cart.</p>
             {% endif %}
+        </div>
+        <div class="col-12">
+            <p>Long Description: {{ product.desc }}</p>
         </div>
     </div>
 </div>
@@ -42,6 +65,17 @@
 
 {% block postloadjs %}
 <script>
-    console.log('test');
+    function increment() {
+        var quantityField = document.getElementById("id_quantity");
+        quantityField.value = parseInt(quantityField.value) + 1;
+    }
+
+    function decrement() {
+        var quantityField = document.getElementById("id_quantity");
+        var currentValue = parseInt(quantityField.value);
+        if (currentValue > 1) {
+            quantityField.value = currentValue - 1;
+        }
+    }
 </script>
 {% endblock postloadjs %}
