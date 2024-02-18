@@ -24,7 +24,7 @@ class FileAdmin(admin.ModelAdmin):
 
 @admin.register(Basket)
 class BasketAdmin(admin.ModelAdmin):
-    list_display = ('user', 'product_sku', 'quantity', 'price', 'created_at')
+    list_display = ('user', 'product', 'product_sku', 'quantity', 'price', 'created_at')
     search_fields = ('user__username', 'product_sku')
     list_filter = ('created_at', 'user')
 

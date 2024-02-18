@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import Product, Collection, Basket
 from .forms import AddToBasketForm
 
@@ -33,6 +34,7 @@ def ProductDetail(request, sku):
             quantity = form.cleaned_data['quantity']
             Basket.objects.create(
                 user=request.user,
+                product=product,
                 product_sku=product.sku,
                 quantity=quantity,
                 price=product.price
@@ -60,16 +62,47 @@ def ShopSearch(request):
 
 
 # Shop basket :
+@login_required
 def ShopBasket(request):
-    return render(request, 'shop_basket.html')
+    user_basket_items = Basket.objects.filter(user=request.user)
+
+    # Create a dictionary to store product details
+    product_details = {}
+
+    for basket_item in user_basket_items:
+        sku = basket_item.product_sku
+
+        # Check if product details for the SKU are already retrieved
+        if sku not in product_details:
+            product_details[sku] = {
+                'name': basket_item.product.name if basket_item.product else 'N/A',
+                'price': basket_item.product.price if basket_item.product else 'N/A',
+            }
+
+    total_price = 0  # Initialize total price
+
+    # Calculate the price for each line based on quantity * product price
+    for basket_item in user_basket_items:
+        basket_item.quantity = max(basket_item.quantity, 1)  # Ensure quantity is at least 1
+        basket_item.line_price = basket_item.quantity * basket_item.product.price if basket_item.product else 0
+        total_price += basket_item.line_price  # Add the line price to the total
+
+    context = {
+        'basket_items': user_basket_items,
+        'product_details': product_details,
+        'total_price': total_price
+    }
+    return render(request, 'shop_basket.html', context)
 
 
 # Shop checkout :
+@login_required
 def ShopCheckout(request):
     return render(request, 'shop_checkout.html')
 
 
 # Shop checkout :
+@login_required
 def ShopOrder(request):
     return render(request, 'shop_order.html')
 

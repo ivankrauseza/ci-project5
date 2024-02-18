@@ -75,6 +75,7 @@ class Basket(models.Model):
         verbose_name_plural = "Basket Lines"
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, default=None)
     product_sku = models.CharField(max_length=255)
     quantity = models.IntegerField(default=1)
     price = models.DecimalField(max_digits=10, decimal_places=2)
