@@ -41,7 +41,7 @@
                                     {% endif %}
                                     <td class="text-center px-2">
                                         
-            <button type="button" class="btn btn-small text-primary" data-bs-toggle="modal" data-bs-target="#updateQuantityModal{{ basket_item.id }}">
+            <button type="button" class="btn btn-sm text-primary" data-bs-toggle="modal" data-bs-target="#updateQuantityModal{{ basket_item.id }}">
                 {{ basket_item.quantity }}
               </button>
               <!-- Modal -->
@@ -67,7 +67,7 @@
                                     <td class="text-start px-1">
                                         <form method="post" action="{% url 'delete_basket_item' basket_item.id %}">
                                             {% csrf_token %}
-                                            <button class="btn btn-small text-danger" type="submit" style="padding:0;font-size:14px;">
+                                            <button class="btn btn-sm text-danger" type="submit" style="padding:0;font-size:14px;">
                                                 <i class="fa-solid fa-circle-xmark"></i>
                                             </button>
                                         </form>
@@ -79,30 +79,45 @@
 
                         <div class="container-fluid delivery">
                             <div class="row">
-                                <div class="col-12 p-3">
+                                <div class="col-12 p-3 bg-light">
                                     <p><strong>Delivery details:</strong></p>
-                                    <p>dskfgsjkdgfsdkjfgsk</p>
-                                    <button type="button" class="btn btn-small btn-light" data-bs-toggle="modal" data-bs-target="#editAddress">
-                                        Edit
-                                    </button>
-                                    <div class="modal fade" id="editAddress" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                          <div class="modal-content">
-                                            <div class="modal-header">
-                                              <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
-                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                              <!-- Add your modal content here -->
-                                              <p>Modal body text goes here.</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                              <!-- Add additional buttons if needed -->
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
+
+{% if user_delivery_address %}
+<p>
+    {{ user_delivery_address.name }}
+    <br>
+    {{ user_delivery_address.phone }}
+    <br>
+    {{ user_delivery_address.street_address }}
+    <br>
+    {{ user_delivery_address.city }}, {{ user_delivery_address.state }}, {{ user_delivery_address.postal_code }}
+    <br>
+    {{ user_delivery_address.country }}
+</p>
+<div class="row">
+    <div class="col-6 text-start">
+        <button type="button" class="btn btn-sm text-primary p-0" data-bs-toggle="modal" data-bs-target="#myAddress">
+            Edit address
+        </button>
+    </div>
+    <div class="col-6 text-end">
+        <form method="post" action="{% url 'shop_basket' %}">
+            {% csrf_token %}
+            <input type="hidden" name="delete_address" value="1">
+            <button type="submit" class="btn btn-sm text-danger">
+                <i class="fa-solid fa-trash"></i> Remove
+            </button>
+        </form>
+    </div>
+</div>
+
+{% else %}
+<p>No delivery address on file.</p>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myAddress">
+    Enter address
+</button>
+{% endif %}
+
                                 </div>
                             </div>
                         </div>
@@ -125,9 +140,15 @@
                             </div>
                             <div class="text-center">
                                 <hr>
+                                {% if user_delivery_address %}
                                 <a class="btn btn-success btn-block w-100" href="{% url 'shop_checkout' %}">
                                     PLACE ORDER
                                 </a>
+                                {% else %}
+                                <button type="button" class="btn btn-light w-100" data-bs-toggle="modal" data-bs-target="#myAddress">
+                                    PLACE ORDER
+                                </button>
+                                {% endif %}
                                 <hr>
                                 <sup class="text-danger">VAT included (23%)</sup>
                             </div>
@@ -143,11 +164,28 @@
     </div>
 </div>
 
+
+<!-- Add this to your HTML file -->
+<div class="modal fade" id="myAddress" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delivery address</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="post" action="{% url 'shop_basket' %}">
+            {% csrf_token %}
+            {{ order_address_form.as_p }}
+            <button type="submit">Save Address</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   
 {% endblock %}
 
 {% block postloadjs %}
-<script>
-    console.log('test');
-</script>
 {% endblock postloadjs %}

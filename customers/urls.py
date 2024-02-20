@@ -8,4 +8,5 @@ urlpatterns = [
     path('delete/', views.AccountDelete, name='account_delete'),
     path('orders/', views.AccountOrders, name='account_orders'),
     path('orders/detail/', views.AccountOrderDetail, name='account_order_detail'),
+
 ]

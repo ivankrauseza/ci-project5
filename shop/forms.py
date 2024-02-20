@@ -1,6 +1,6 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django import forms
-from .models import Product
+from .models import Product, OrderDeliveryAddress
 
 
 class ProductCreateForm(forms.ModelForm):
@@ -62,3 +62,30 @@ class AddToBasketForm(forms.Form):
             # If conversion fails, raise a validation error
             raise forms.ValidationError('Enter a valid number.')
         return quantity
+    
+
+class OrderDeliveryAddressForm(forms.ModelForm):
+    # Change street_address to CharField with widget=forms.TextInput
+    street_address = forms.CharField(required=True, widget=forms.TextInput(attrs={'placeholder': 'Street Address'}))
+
+    class Meta:
+        model = OrderDeliveryAddress
+        fields = [
+            'name',
+            'phone',
+            'street_address',
+            'city',
+            'state',
+            'postal_code',
+            'country',
+        ]
+
+        # Set all fields as required
+        widgets = {
+            'city': forms.TextInput(attrs={'required': True}),
+            'state': forms.TextInput(attrs={'required': True}),
+            'postal_code': forms.TextInput(attrs={'required': True}),
+            'country': forms.TextInput(attrs={'required': True, 'readonly': True, 'value': 'Ireland'}),
+            'phone': forms.TextInput(attrs={'required': True}),
+            'name': forms.TextInput(attrs={'required': True}),
+        }
