@@ -14,14 +14,15 @@
             
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-9">
-                        <table width="100%" cellpadding="0" cellspacing="0">
+                    <div class="col-8">
+                        <table width="100%" cellpadding="0" cellspacing="0" style="font-size: 14px;">
                             <thead>
                                 <tr>
                                     <th>Product Name</th>
-                                    <th>Price</th>
-                                    <th>QTY</th>
-                                    <th>Total Price</th>
+                                    <th class="text-center px-1" style="width:94px;">Price</th>
+                                    <th class="text-center px-1" style="width:16px;">QTY</th>
+                                    <th class="text-center px-1" style="width:94px;">Price</th>
+                                    <th class="text-center px-1" style="width:16px;"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -35,16 +36,47 @@
                                                 <sup>{{ basket_item.product.sku }}</sup>
                                             </a>
                                         </td>
-                                        <td>&euro; {{ basket_item.product.price }}</td>
+                                        <td class="text-center px-1">&euro; {{ basket_item.product.price }}</td>
                                     {% endif %}
-                                    <td>{{ basket_item.quantity }}</td>
-                                    <td>{{ basket_item.line_price }}</td>
+                                    <td class="text-center px-1">
+                                        
+            <button type="button" class="btn btn-small text-primary" data-bs-toggle="modal" data-bs-target="#updateQuantityModal{{ basket_item.id }}">
+                {{ basket_item.quantity }}
+              </button>
+              <!-- Modal -->
+              <div class="modal fade" id="updateQuantityModal{{ basket_item.id }}" tabindex="-1" aria-labelledby="updateQuantityModalLabel{{ basket_item.id }}" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="updateQuantityModalLabel{{ basket_item.id }}">Update Quantity</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form method="post" action="{% url 'update_basket_item' basket_item.id %}">
+                          {% csrf_token %}
+                          <input type="number" name="quantity" class="form-control" value="{{ basket_item.quantity }}" min="1" max="{{ basket_item.product.stock }}">
+                          <button type="submit" class="btn btn-primary mt-3">Update</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                                    </td>
+                                    <td class="text-center px-1">&euro; {{ basket_item.line_price }}</td>
+                                    <td class="text-center px-1">
+                                        <form method="post" action="{% url 'delete_basket_item' basket_item.id %}">
+                                            {% csrf_token %}
+                                            <button class="btn btn-small text-danger" type="submit" style="padding:0;font-size:14px;">
+                                                <i class="fa-solid fa-circle-xmark"></i>
+                                            </button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-3">
+                    <div class="col-4 px-5">
                         &euro; {{ total_price }}
                         <hr>
                         <a href="{% url 'shop_checkout' %}">Checkout</a>
@@ -55,6 +87,8 @@
         </div>
     </div>
 </div>
+
+  
 {% endblock %}
 
 {% block postloadjs %}

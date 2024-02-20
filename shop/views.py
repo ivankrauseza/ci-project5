@@ -95,6 +95,29 @@ def ShopBasket(request):
     return render(request, 'shop_basket.html', context)
 
 
+@login_required
+def DeleteBasketItem(request, basket_item_id):
+    basket_item = get_object_or_404(Basket, id=basket_item_id, user=request.user)
+
+    # Perform the deletion
+    basket_item.delete()
+
+    return redirect('shop_basket')
+
+@login_required
+def update_basket_item(request, basket_item_id):
+    basket_item = get_object_or_404(Basket, id=basket_item_id, user=request.user)
+
+    if request.method == 'POST':
+        new_quantity = int(request.POST.get('quantity', 1))
+
+        # Update the quantity
+        basket_item.quantity = max(new_quantity, 1)
+        basket_item.save()
+
+    return redirect('shop_basket')
+
+
 # Shop checkout :
 @login_required
 def ShopCheckout(request):
