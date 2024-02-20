@@ -178,31 +178,30 @@
     
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasRightLabel">Account Settings</h5>
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">
+            <i class="fa-solid fa-gear"></i> <strong>Settings</strong>
+        </h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
         {% if user.is_authenticated %}
+
             <ul>
                 <li>
-                    <a href="{% url 'account_index' %}">
-                        <strong>
-                            My Account
-                        </strong>
+                    <a class="btn" href="{% url 'account_index' %}">
+                        My Account
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'account_orders' %}">
+                    <a class="btn" href="{% url 'account_orders' %}">
                         My Orders
                     </a>
                 </li>
             </ul>
 
-            <hr>
-
             <form method="post" action="{% url 'account_logout' %}">
                 {% csrf_token %}
-                <button type="submit">Logout</button>
+                <button class="btn btn-small text-danger" type="submit">Logout</button>
             </form>
         {% endif %}
     </div>

@@ -1,5 +1,19 @@
 body {
     margin: 0;
+
+    a {
+        text-decoration: none;
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    h1 {
+        border-bottom: 2px dotted #ccc;
+        padding: 0.25em 0;
+        margin-bottom: 1em;
+    }
 }
 
 .basket_count {
@@ -17,4 +31,43 @@ body {
     background-color: green;
     color: white;
     border-radius: 16px;
+}
+
+table.order {
+    border-bottom: solid 2px #eee;
+    thead {
+        tr {
+            th {
+                padding: 8px 0;
+                border-bottom: solid 2px #eee;
+            }
+        }
+    }
+    tbody {
+        tr {
+            td {
+                border-bottom: solid 1px #eee;
+                padding: 8px;
+            }
+            &:hover {
+                background-color: #f8f8f8;
+            }
+        }
+    }
+}
+
+.delivery {
+    border-radius: 8px;
+    margin: 32px 0;
+    border: solid 1px #eee;
+}
+
+.summary {
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #fff;
+    border-top: solid 4px #eee;
+    h6 {
+        color:#666
+    }
 }

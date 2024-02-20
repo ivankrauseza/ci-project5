@@ -3,7 +3,7 @@
 {% block title %}Shop{% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         
         <div class="col-12">
@@ -12,17 +12,18 @@
 
         <div class="col-12">
             
+            {% if basket_items %}
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-8">
-                        <table width="100%" cellpadding="0" cellspacing="0" style="font-size: 14px;">
+                        <table class="order" width="100%" cellpadding="0" cellspacing="0" style="font-size: 14px;">
                             <thead>
                                 <tr>
                                     <th>Product Name</th>
                                     <th class="text-center px-1" style="width:94px;">Price</th>
                                     <th class="text-center px-1" style="width:16px;">QTY</th>
                                     <th class="text-center px-1" style="width:94px;">Price</th>
-                                    <th class="text-center px-1" style="width:16px;"></th>
+                                    <th class="text-center" style="width:32px;"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -38,7 +39,7 @@
                                         </td>
                                         <td class="text-center px-1">&euro; {{ basket_item.product.price }}</td>
                                     {% endif %}
-                                    <td class="text-center px-1">
+                                    <td class="text-center px-2">
                                         
             <button type="button" class="btn btn-small text-primary" data-bs-toggle="modal" data-bs-target="#updateQuantityModal{{ basket_item.id }}">
                 {{ basket_item.quantity }}
@@ -63,7 +64,7 @@
                 </div>
                                     </td>
                                     <td class="text-center px-1">&euro; {{ basket_item.line_price }}</td>
-                                    <td class="text-center px-1">
+                                    <td class="text-start px-1">
                                         <form method="post" action="{% url 'delete_basket_item' basket_item.id %}">
                                             {% csrf_token %}
                                             <button class="btn btn-small text-danger" type="submit" style="padding:0;font-size:14px;">
@@ -75,13 +76,67 @@
                                 {% endfor %}
                             </tbody>
                         </table>
+
+                        <div class="container-fluid delivery">
+                            <div class="row">
+                                <div class="col-12 p-3">
+                                    <p><strong>Delivery details:</strong></p>
+                                    <p>dskfgsjkdgfsdkjfgsk</p>
+                                    <button type="button" class="btn btn-small btn-light" data-bs-toggle="modal" data-bs-target="#editAddress">
+                                        Edit
+                                    </button>
+                                    <div class="modal fade" id="editAddress" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
+                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                              <!-- Add your modal content here -->
+                                              <p>Modal body text goes here.</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                              <!-- Add additional buttons if needed -->
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-4 px-5">
-                        &euro; {{ total_price }}
-                        <hr>
-                        <a href="{% url 'shop_checkout' %}">Checkout</a>
+                    <div class="col-1"></div>
+                    <div class="col-3">
+                        <div class="summary shadow">
+                            <h4 class="text-center">Order summary:</h4>
+                            <hr>
+                            <div class="text-center">
+                                <h6>
+                                    Order Amount: <strong>&euro; {{ total_price|floatformat:2 }}</strong>
+                                </h6>
+                                <h6>
+                                    Delivery Charge: <strong>Free</strong>
+                                </h6>
+                                <h5>
+                                    Total: <strong>&euro; {{ total_price }}</strong>
+                                </h5>
+                            </div>
+                            <div class="text-center">
+                                <hr>
+                                <a class="btn btn-success btn-block w-100" href="{% url 'shop_checkout' %}">
+                                    PLACE ORDER
+                                </a>
+                                <hr>
+                                <sup class="text-danger">VAT included (23%)</sup>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                {% else %}
+                    <p>Your basket is empty.</p>
+                {% endif %}
             </div>
             
         </div>
