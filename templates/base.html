@@ -45,8 +45,13 @@
                     </a>
                     <!-- Add more social login links as needed -->
                 {% endif %}
-                <a href="{% url 'shop_basket' %}" class="btn text-white">
+                <a href="{% url 'shop_basket' %}" class="btn text-white" style="position: relative;">
                     <i class="fa-solid fa-cart-shopping"></i>
+                    {% if basket_item_count > 0 %}
+                        <span class="basket_count">
+                            {{ basket_item_count }}
+                        </span>
+                    {% endif %}
                 </a>
             </div>
         </div>

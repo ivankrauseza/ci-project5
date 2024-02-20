@@ -67,6 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request', #allauth needs this
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'shop.context_processors.basket_item_count',
             ],
         },
     },
