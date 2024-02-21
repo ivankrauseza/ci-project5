@@ -1,6 +1,26 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django import forms
-from .models import Product, OrderDeliveryAddress
+from .models import Product, OrderDeliveryAddress, File
+
+
+class FileForm(forms.ModelForm):
+    class Meta:
+        model = File
+        fields = ['file', 'description']
+
+    def __init__(self, *args, **kwargs):
+        super(FileForm, self).__init__(*args, **kwargs)
+
+        # Customize the file input widget
+        self.fields['file'].widget.attrs['accept'] = 'image/*'  # Specify accepted file types (e.g., images)
+
+    def clean_file(self):
+        file = self.cleaned_data['file']
+
+        # You can perform additional validation on the file if needed
+        # For example, check the file type, size, etc.
+
+        return file
 
 
 class ProductCreateForm(forms.ModelForm):

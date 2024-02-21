@@ -177,7 +177,7 @@
           <form method="post" action="{% url 'shop_basket' %}">
             {% csrf_token %}
             {{ order_address_form.as_p }}
-            <button type="submit">Save Address</button>
+            <button class="btn btn-secondary" type="submit">Save Address</button>
           </form>
         </div>
       </div>

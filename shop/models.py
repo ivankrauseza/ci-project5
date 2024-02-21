@@ -60,7 +60,7 @@ class File(models.Model):
         on_delete=models.CASCADE,
         related_name='files'
         )
-    file = models.CharField(max_length=255, blank=True, null=True)
+    file = models.FileField(upload_to='uploads/', default="")
     type = models.CharField(max_length=255, blank=True, null=True)
     description = models.CharField(max_length=255, blank=True, null=True)
 

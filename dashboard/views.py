@@ -1,8 +1,8 @@
 from django.views import View
 from django.shortcuts import get_object_or_404, render, redirect
-from shop.models import Product
-from shop.forms import ProductCreateForm, ProductUpdateForm
 from django.urls import reverse
+from shop.models import Product, File
+from shop.forms import ProductCreateForm, ProductUpdateForm, FileForm
 from django.http import HttpResponseBadRequest
 
 
@@ -50,17 +50,43 @@ class DashboardProductEdit(View):
 
     def get(self, request, sku):
         product = get_object_or_404(Product, sku=sku)
-        form = ProductUpdateForm(instance=product)
-        return render(request, self.template_name, {'form': form, 'product': product})
+        product_form = ProductUpdateForm(instance=product)
+        file_form = FileForm(request.POST, request.FILES)
+        
+        files = File.objects.filter(product=product)
+
+        return render(request, self.template_name, {
+            'product_form': product_form,
+            'file_form': file_form,
+            'product': product,
+            'files': files
+        })
 
     def post(self, request, sku):
         product = get_object_or_404(Product, sku=sku)
-        form = ProductUpdateForm(request.POST, instance=product)
-        if form.is_valid():
-            form.save()
-            return redirect('db_product_edit', sku=product.sku)
-        return render(request, self.template_name, {'form': form, 'product': product})
+        product_form = ProductUpdateForm(request.POST, instance=product)
+        file_form = FileForm(request.POST, request.FILES)
 
+        if file_form.is_valid():
+            file_instance = file_form.save(commit=False)
+            file_instance.product = product
+            file_instance.save()
+            return redirect('db_product_edit', sku=product.sku)
+        
+        if product_form.is_valid():
+            product_form.save()
+            return redirect('db_product_edit', sku=product.sku)
+        
+        return render(request, self.template_name, {'product_form': product_form, 'file_form': file_form, 'product': product})
+
+
+class DeleteFileView(View):
+    def post(self, request, file_id):
+        file_instance = get_object_or_404(File, id=file_id)
+        file_instance.file.delete()  # Delete the associated file from storage
+        file_instance.delete()  # Delete the File model instance
+        return redirect('db_product_edit')
+    
 
 # Dashboard products :
 def DashboardProductDelete(request, pk):
