@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import DashboardProductEdit, DeleteFileView
+from .views import DashboardProductEdit, FileDeleteView
 
 
 urlpatterns = [
@@ -11,7 +11,8 @@ urlpatterns = [
     path('products/<int:pk>/delete/', views.DashboardProductDelete, name='db_product_delete'),
     path('products/delete/', views.DashboardProductDelete, name='db_product_delete'),
     path('orders/', views.DashboardOrder, name='db_orders'),
-    path('dashboard/product/edit/<sku>/', DashboardProductEdit.as_view(), name='db_product_edit'),
-    path('dashboard/product/delete_file/<file_id>/', DeleteFileView.as_view(), name='delete_file'),
+    path('product/edit/<sku>/', DashboardProductEdit.as_view(), name='db_product_edit'),
+    # path('product/delete_file/<file_id>/', DeleteFileView.as_view(), name='delete_file'),
+    path('delete_file/<int:file_id>/', FileDeleteView.as_view(), name='delete_file'),
     
 ]

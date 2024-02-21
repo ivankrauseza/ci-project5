@@ -1,3 +1,4 @@
+from django.core.files.storage import default_storage
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Product, Collection, Basket, OrderDeliveryAddress
@@ -26,6 +27,8 @@ def ProductDetail(request, sku):
         product_in_basket = Basket.objects.filter(user=request.user, product_sku=product.sku).exists()
     else:
         product_in_basket = False
+    
+    image = product.files.first()
 
     if request.method == 'POST':
         form = AddToBasketForm(max_quantity, request.POST)
@@ -46,7 +49,8 @@ def ProductDetail(request, sku):
     return render(request, 'product_detail.html', {
         'form': form,
         'product': product,
-        'product_in_basket': product_in_basket
+        'product_in_basket': product_in_basket,
+        'product_image_url': image.file.url if image and default_storage.exists(image.file.name) else None
     })
 
 

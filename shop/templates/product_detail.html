@@ -5,18 +5,23 @@
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid">
+<div class="container">
     <div class="row">
 
         <div class="col-12 pb-5">    
             <small>
-                <a href="{% url 'shop_index' %}">All Products </a> &gt; {{ product.category }}
+                <a href="{% url 'shop_index' %}">All Products </a> &gt; <a href="{% url 'shop_collection' product.category.slug|lower %}">{{ product.category }}</a> &gt; {{ product.sku }}
             </small>
         </div>
 
-        <div class="col-sm-12 col-md-6">
-            Image
+        <div class="col-sm-12 col-md-5">
+            {% if product_image_url %}
+                <img src="{{ product_image_url }}" alt="{{ product.name }}">
+            {% else %}
+                <img src="https://bmie23a.s3.eu-west-1.amazonaws.com/placeholders/product_image.jpg" alt="no image">
+            {% endif %}
         </div>
+        <div class="col-sm-12 col-md-1"></div>
         <div class="col-sm-12 col-md-6">
             <p>{{ product.brand }}</p>
             <h1>{{ product.name }}</h1>
@@ -50,14 +55,16 @@
                         </div>
                     </div>
                 </form>
+                <div id="errorlist"></div>
                 {% endif %}
             {% else %}
             <hr>
                 <p>Please <a href="{% url 'account_login' %}">log in</a> to add this product to your cart.</p>
             {% endif %}
         </div>
-        <div class="col-12">
-            <p>Long Description: {{ product.desc }}</p>
+        <div class="col-12 py-3">
+            <h5>Additional Information</h5>
+            <p>{{ product.desc }}</p>
         </div>
     </div>
 </div>
@@ -77,5 +84,11 @@
             quantityField.value = currentValue - 1;
         }
     }
+    
+    $(document).ready(function () {
+        // Move .errorlist to #errorlist
+        $('.errorlist').appendTo('#errorlist');
+    });
+
 </script>
 {% endblock postloadjs %}

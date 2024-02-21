@@ -1,5 +1,5 @@
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         
         {% if product_items %}
@@ -27,8 +27,12 @@
         {% for product in product_items %}
             <div class="col-sm-12 col-md-4 col-lg-3 mb-3">
                 <a href="{% url 'product_detail' sku=product.sku %}">
-                    <div class="card d-flex flex-column" style="height: 100%;">
-                        <img src="https://craftypixels.com/placeholder-image/1024x1024/cccccc/0011ff&text=placeholder+image" class="card-img-top" alt="...">
+                    <div class="card d-flex flex-column shadow-sm border-0" style="height: 100%;">
+                        {% if product.image_url %}
+                            <img src="{{ product.image_url }}" alt="{{ product.images.0.description }}">
+                        {% else %}
+                            <img src="https://bmie23a.s3.eu-west-1.amazonaws.com/placeholders/product_image.jpg" alt="no image">
+                        {% endif %}
                         <div class="card-body">
                             <small class="card-text">
                                 <sub>

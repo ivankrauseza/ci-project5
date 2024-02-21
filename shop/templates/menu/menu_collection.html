@@ -1,4 +1,9 @@
+
+<h6 class="py-2">
+    Collections:
+</h6>
 <ul>
+    <li><a href="{% url 'shop_index' %}"><strong>All products</strong></a></li>
     {% for item in menu_items %}
         <li><a href="/collection/{{ item.slug }}">{{ item.catname }}</a></li>
     {% endfor %}

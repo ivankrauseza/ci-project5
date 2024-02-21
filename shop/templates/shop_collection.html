@@ -3,13 +3,17 @@
 {% block title %}Shop{% endblock %}
 
 {% block content %}
-<div class="container-fluid">
+<div class="container">
     <div class="row">
 
         <div class="col-12 pb-5">    
             <small>
                 <a href="{% url 'shop_index' %}">All Products</a> &gt; <strong>{{ collection.catname }}</strong>
             </small>
+        </div>
+
+        <div class="col-12 pb-5">   
+            <h1>{{ collection.catname }}</h1>
         </div>
         
         <div class="col-2">

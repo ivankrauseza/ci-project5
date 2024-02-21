@@ -24,7 +24,7 @@ def DashboardProduct(request):
             # Check if a product with the same SKU already exists
             if Product.objects.filter(sku=sku).exists():
                 return HttpResponseBadRequest("Product with this SKU already exists.")
-            
+
             product = form.save()
             return redirect('db_product_edit', sku=product.sku)
     else:
@@ -72,21 +72,31 @@ class DashboardProductEdit(View):
             file_instance.product = product
             file_instance.save()
             return redirect('db_product_edit', sku=product.sku)
-        
+
         if product_form.is_valid():
             product_form.save()
             return redirect('db_product_edit', sku=product.sku)
-        
-        return render(request, self.template_name, {'product_form': product_form, 'file_form': file_form, 'product': product})
+
+        return render(request, self.template_name, {
+            'product_form': product_form,
+            'file_form': file_form,
+            'product': product
+            })
 
 
-class DeleteFileView(View):
-    def post(self, request, file_id):
-        file_instance = get_object_or_404(File, id=file_id)
-        file_instance.file.delete()  # Delete the associated file from storage
-        file_instance.delete()  # Delete the File model instance
-        return redirect('db_product_edit')
-    
+# Delete product image :
+class FileDeleteView(View):
+    def post(self, request, *args, **kwargs):
+        file_id = kwargs.get('file_id')
+        file = get_object_or_404(File, pk=file_id)
+        sku = file.product.sku
+
+        # Delete the file
+        file.delete()
+
+        # Redirect back to the product edit page
+        return redirect('db_product_edit', sku=sku)
+
 
 # Dashboard products :
 def DashboardProductDelete(request, pk):
