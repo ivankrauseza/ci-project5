@@ -1,1 +1,1 @@
-web: gunicorn lavoro.wsgi
+web: gunicorn cadence.wsgi
