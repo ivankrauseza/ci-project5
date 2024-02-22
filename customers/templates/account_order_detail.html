@@ -7,13 +7,33 @@
     <div class="row">
         <div class="col-12">
 
-            <h1>
-                <a href="{% url 'account_index' %}">
-                    Account
+            <small>
+                <a href="{% url 'account_orders' %}">
+                    My Orders
                 </a>
-            </h1>
+            </small>
             
-            <h2>Order Detail</h2>
+            <h1>Order No.: {{ order.order_id }}</h1>
+            
+<ul>
+    <li><hr></li>
+    {% for basket_line in basket_lines %}
+    <li>
+        <div class="row">
+            <div class="col-9">
+                {{ basket_line.product }}
+                <br>
+                <small>(Unit Price: <strong>&euro; {{ basket_line.price }}</strong> * Quantity: <strong>{{ basket_line.quantity }}</strong>)</small>
+            </div>
+            <div class="col-3 text-end">
+                &euro; {{ basket_line.total_cost }}
+            </div>
+        </div></li>
+    <li><hr></li>
+        <!-- Add more fields as needed -->
+    {% endfor %}
+</ul>
+<p>Total: {{ order.total_amount }}</p>
         </div>
     </div>
 </div>

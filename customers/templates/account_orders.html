@@ -7,21 +7,38 @@
     <div class="row">
         <div class="col-12">
             
-            <h1>
+            <small>
                 <a href="{% url 'account_index' %}">
                     Account
                 </a>
+            </small>
+
+            <h1>
+                My Orders
             </h1>
 
-            <h2>My Orders</h2>
-
             {% if user.is_authenticated %}
-                <a href="{% url 'account_order_detail' %}">
-                    Order Detail
-                </a>
+                <ul>
+                    <li>
+                        <hr>
+                    </li>
+                    {% for order in orders %}
+                        <li>
+                            <a href="{% url 'account_order_detail' order.order_id %}">
+                                Order No. {{ order.order_id }}
+                                <br>
+                                <sup>{{ order.created_at }}</sup>
+                            </a>
+                        </li>
+                        <li>
+                            <hr>
+                        </li>
+                    {% endfor %}
+                </ul>
             {% else %}
                 <p>Please <a href="{% url 'login' %}">log in</a> to access this page.</p>
             {% endif %}
+
 
         </div>
     </div>

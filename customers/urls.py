@@ -7,6 +7,6 @@ urlpatterns = [
     path('update/', views.AccountUpdate, name='account_update'),
     path('delete/', views.AccountDelete, name='account_delete'),
     path('orders/', views.AccountOrders, name='account_orders'),
-    path('orders/detail/', views.AccountOrderDetail, name='account_order_detail'),
+    path('orders/detail/<int:order_id>/', views.AccountOrderDetail, name='account_order_detail'),
 
 ]

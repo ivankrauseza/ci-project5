@@ -5,5 +5,5 @@ def basket_item_count(request):
     user = request.user
     count = 0
     if user.is_authenticated:
-        count = Basket.objects.filter(user=user).count()
+        count = Basket.objects.filter(user=user, transaction="B").count()
     return {'basket_item_count': count}

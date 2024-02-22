@@ -95,6 +95,7 @@ class Basket(models.Model):
     product_sku = models.CharField(max_length=255)
     quantity = models.IntegerField(default=1)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    customer_id = models.CharField(max_length=120, null=True)
     document = models.CharField(max_length=20, default="0000000000")
     TRANSACTION_CHOICES = [
         ('D', 'Default'),
@@ -112,10 +113,10 @@ class Basket(models.Model):
 
 # Orders :
 class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    order_number = models.CharField(max_length=255, unique=True)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    # order_number = models.CharField(max_length=255, unique=True)
     delivery_address = models.TextField()
-    order_date = models.DateTimeField(auto_now_add=True)
+    # order_date = models.DateTimeField(auto_now_add=True)
     # Stripe Webhook
     order_id = models.CharField(max_length=120, unique=True, null=True)  # Unique identifier for the order
     created_at = models.DateTimeField(auto_now_add=True, null=True)  # Timestamp when the order was created
@@ -129,7 +130,7 @@ class Order(models.Model):
     status = models.CharField(max_length=30, default='pending', null=True)  # Order status (e.g., pending, paid, fulfilled, canceled)
 
     def __str__(self):
-        return f"Order #{self.order_number} by {self.user.username}"
+        return f"Order {self.order_id}"
     
 
 # Order lines :

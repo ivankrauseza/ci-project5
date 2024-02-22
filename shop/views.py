@@ -8,6 +8,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Product, Collection, Basket, OrderDeliveryAddress, StripeCustomer, Order
 from .forms import AddToBasketForm, OrderDeliveryAddressForm
+import time
 
 # Email
 import os
@@ -38,6 +39,16 @@ def ProductDetail(request, sku):
     max_quantity = int(Product.objects.get(sku=sku).stock)
     form = AddToBasketForm(max_quantity, request.POST)
 
+    
+    # Logged In - Get Stripe ID :
+    try:
+        customer = StripeCustomer.objects.get(user=request.user)
+        scid = customer.stripe_id
+
+    # Logged Out :
+    except StripeCustomer.DoesNotExist:
+        scid = None
+
     if request.user.is_authenticated:
         product_in_basket = Basket.objects.filter(user=request.user, product_sku=product.sku).exists()
     else:
@@ -52,10 +63,12 @@ def ProductDetail(request, sku):
             quantity = form.cleaned_data['quantity']
             Basket.objects.create(
                 user=request.user,
+                customer_id=scid,
                 product=product,
                 product_sku=product.sku,
                 quantity=quantity,
-                price=product.price
+                price=product.price,
+                transaction="B"
             )
             return redirect('product_detail', sku=sku)
     else:
@@ -83,7 +96,10 @@ def ShopSearch(request):
 # Shop basket :
 @login_required
 def ShopBasket(request):
-    user_basket_items = Basket.objects.filter(user=request.user)
+    user_basket_items = Basket.objects.filter(
+        user=request.user,
+        transaction="B"
+    )
 
     try:
         user_delivery_address = OrderDeliveryAddress.objects.get(customer=request.user)
@@ -221,8 +237,13 @@ def create_checkout_session(request):
         scid = None
         # Guest checkout...
 
+    scheme = request.scheme
+    domain = request.get_host()
+    
+
     if request.method == 'GET':
-        domain_url = 'https://ivankrause-ci-project5-4b20229f1d0d.herokuapp.com/'
+        domain_url = f'{scheme}://{domain}/'
+        # domain_url = 'http://localhost:8000/'
         stripe.api_key = settings.STRIPE_SECRET_KEY
         try:
             # Create new Checkout Session for the order
@@ -245,7 +266,7 @@ def create_checkout_session(request):
                         'name': 'T-shirt',
                         'quantity': 1,
                         'currency': 'eur',
-                        'amount': '2000',
+                        'amount': '2000', # as cents
                     }
                 ]
             )
@@ -257,12 +278,10 @@ def create_checkout_session(request):
 # STRIPE WEBHOOKS :
 @csrf_exempt
 def stripe_webhook(request):
-
     stripe.api_key = settings.STRIPE_SECRET_KEY
     endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
     payload = request.body
-    # sig_header = request.META['HTTP_STRIPE_SIGNATURE']
-    sig_header = request.headers.get('Stripe-Signature')
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
     event = None
 
     try:
@@ -270,26 +289,15 @@ def stripe_webhook(request):
             payload, sig_header, endpoint_secret
         )
     except ValueError as e:
-        print(e)
         # Invalid payload
         return HttpResponse(status=400)
     except stripe.error.SignatureVerificationError as e:
-        print(e)
         # Invalid signature
-        return HttpResponse(status=400) 
+        return HttpResponse(status=400)
 
     # Handle the checkout.session.completed event
-    if event['type'] == 'payment_intent.created':
-        print("payment_intent.created.")
-
-    elif event['type'] == 'customer.created':
-        print("customer.created.")
-
-    elif event['type'] == 'payment_intent.succeeded':
-        print("payment_intent.succeeded.")
-
-    elif event['type'] == 'checkout.session.completed':
-
+    if event['type'] == 'checkout.session.completed':
+        
         # Get session objects :
         session = event['data']['object']
         session_id = session.get('id')
@@ -299,15 +307,13 @@ def stripe_webhook(request):
         total_amount_decimal = Decimal(str(total_amount))
         currency = session.get('currency')
 
-        last_order = Order.objects.order_by('-order_id').first()
-        if last_order:
-            sequence = str(int(last_order.order_id) + 1)
-        else:
-            sequence = '1000000000'
+        # Generate order number :
+        timestamp = int(time.time())
+        sequence = str(timestamp)
 
         # Create a new Order in Django:
         order = Order(
-            order_number=sequence,
+            order_id=sequence,
             stripe_session_id=str(session_id),
             customer_id=str(customer_id),
             customer_email=str(customer_email),
@@ -325,39 +331,5 @@ def stripe_webhook(request):
             basket_item.document = sequence
             basket_item.transaction = "S"
             basket_item.save()
-        # NEXT - for each item, reduce qty :
-        # NEXT - Empty Basket :
-        # basket_items.delete()
-
-        # Then send confirmation email :
-        def send_order_confirmation_email(customer_email, order_id):
-
-            sender_email = os.environ.get('EMAIL_SEND')
-            sender_password = os.environ.get('EMAIL_KEY')
-
-            subject = "Order Confirmation"
-            body = f"Dear Customer,\n\nYour order with ID {order_id} has been successfully processed.\n\nBest Regards,\nYour Team"
-
-            message = MIMEMultipart()
-            message['From'] = sender_email
-            message['To'] = customer_email  # customer_email
-            message['Subject'] = subject
-            message.attach(MIMEText(body, 'plain'))
-
-            try:
-                server = smtplib.SMTP('smtp.gmail.com', 587)
-                server.starttls()
-                server.login(sender_email, sender_password)
-                server.sendmail(sender_email, customer_email, message.as_string())
-                server.close()
-                print("Email sent successfully!")
-            except Exception as e:
-                print(f"Error: {e}")
-
-        # Call the email function after saving the order
-        send_order_confirmation_email('ivan.krause@gmail.com', sequence)
-
-    else:
-        print("error")
 
     return HttpResponse(status=200)

@@ -42,11 +42,12 @@ class OrderLineInline(admin.TabularInline):
     model = OrderLine
     extra = 1
 
+
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('order_number', 'user', 'delivery_address', 'order_date')
-    search_fields = ('order_number', 'user__username')
+    list_display = ('order_id',)
     inlines = [OrderLineInline]
+
 
 @admin.register(OrderLine)
 class OrderLineAdmin(admin.ModelAdmin):
