@@ -69,112 +69,38 @@
     <footer class="container-fluid p-3">
         <div class="row">
             <div class="col-12">
-                footer
+                    <ul class="footer_menu">
+                        <li>
+                            <strong>
+                                &copy; Cadence Tools 2024
+                            </strong>
+                        </li>
+                        <li>
+                            <a href="{% url 'about' %}">
+                                About Us
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'terms' %}">
+                                Terms and Conditions
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'contact' %}">
+                                Contact Us
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'privacy' %}">
+                                Privacy Policy
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </footer>
 
-    <nav class="container-fluid p-3">
-        <div class="row">
-            <div class="col-12">
-                <ul>
-                    <li>
-                        <a href="{% url 'shop_index' %}">
-                            <strong>
-                                Shop
-                            </strong>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'shop_collection' %}">
-                            Collections
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'shop_search' %}">
-                            Search
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'shop_basket' %}">
-                            Basket
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'shop_checkout' %}">
-                            Checkout
-                        </a>
-                    </li>
-                    <li>Product Detail</li>
-                </ul>
-                <ul>
-                    <li>
-                        <a href="{% url 'about' %}">
-                            About Us
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'terms' %}">
-                            Terms and Conditions
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'contact' %}">
-                            Contact Us
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'privacy' %}">
-                            Privacy Policy
-                        </a>
-                    </li>
-                </ul>
-                {% if user.is_authenticated and user.is_staff %}
-                    <ul>
-                        <li>
-                            <a href="{% url 'db_index' %}">
-                                <strong>
-                                    Dashboard (logged in Admin)
-                                </strong>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'db_products' %}">
-                                List of products
-                            </a>
-                            <ul>
-                                <li>
-                                    <a href="{% url 'db_product_create' %}">
-                                        Create Product
-                                    </a>
-                                </li>
-                                <li>
-                                    Function: Edit Product
-                                </li>
-                                <li>
-                                    <a href="{% url 'db_product_delete' %}">
-                                        Delete Product (cascade - basket)
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="{% url 'db_orders' %}">
-                                View Orders
-                            </a>
-                        </li>
-                    </ul>
-                    {% if user.is_superuser %}
-                        <p>SUPERUSER:</p>
-                    {% else %}
-                        <p>NORMAL STAFF</p>
-                    {% endif %}
-                {% else %}
-                {% endif %}
-            </div>
-        </div>
-        <hr>
-    </nav>
     
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
@@ -203,6 +129,25 @@
                 {% csrf_token %}
                 <button class="btn btn-sm text-danger" type="submit">Logout</button>
             </form>
+
+            <hr>
+
+            {% if user.is_authenticated and user.is_staff %}
+                    <ul>
+                        <li>
+                            <strong>
+                                Dashboard (logged in Admin)
+                            </strong>
+                        </li>
+                        <li>
+                            <a href="{% url 'db_products' %}">
+                                List of products
+                            </a>
+                        </li>
+                    </ul>
+                {% else %}
+                {% endif %}
+
         {% endif %}
     </div>
     </div>

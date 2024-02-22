@@ -114,4 +114,10 @@ form textarea {
   top: 0;
   right: 0;
   margin: 8px;
+}
+
+.footer_menu li {
+  float: left;
+  width: auto;
+  margin: 8px;
 }/*# sourceMappingURL=style.css.map */

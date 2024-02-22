@@ -4,6 +4,9 @@ Code Institute Diploma in Full Stack Software Development - Project 5
 ## Contents
 - [Setup](#setup)
 - [Functionality](#functionality)
+- [Deployment](#deployment)
+- [Testing](#testing)
+- [Bugs](#bugs)
 
 ## Setup
 ### Clone Github Repo
@@ -77,3 +80,31 @@ Setup templates/base.html, and shop/templates/shop_index.html with basic info to
 - Terms and Conditions
 - Contact Us
 - Privacy Policy
+
+## Deployment
+### Deployment to Heroku
+- Create Procfile (web: gunicorn lavoro.wsgi)
+- Freeze requirements (pip freeze > requirements.txt)
+- Create New Project
+- Region: Europe 
+- Setup Config Vars
+- Deployment Method: GitHub > 'ci-project4'
+- Choose a branch to deploy 'main'
+- Deploy Manually
+
+## Testing
+### Validator Testing 
+#### W3C HTML
+To do...
+
+#### W3C CSS
+To do...
+
+#### PEP8
+To do...
+
+#### Lighthouse
+To do...
+
+
+## Bugs
