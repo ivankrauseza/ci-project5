@@ -137,12 +137,11 @@
                                 <h5>
                                     Total: <strong>&euro; {{ total_price }}</strong>
                                 </h5>
-                                <button id="submitBtn">Submit</button>
                             </div>
                             <div class="text-center">
                                 <hr>
                                 {% if user_delivery_address %}
-                                <a class="btn btn-success btn-block w-100" href="{% url 'shop_checkout' %}">
+                                <a id="submitBtn" class="btn btn-success btn-block w-100" href="{% url 'shop_checkout' %}">
                                     PLACE ORDER
                                 </a>
                                 {% else %}

@@ -50,7 +50,11 @@ def ProductDetail(request, sku):
         scid = None
 
     if request.user.is_authenticated:
-        product_in_basket = Basket.objects.filter(user=request.user, product_sku=product.sku).exists()
+        product_in_basket = Basket.objects.filter(
+            user=request.user,
+            transaction="B",
+            product_sku=product.sku
+        ).exists()
     else:
         product_in_basket = False
     
