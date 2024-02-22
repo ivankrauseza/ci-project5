@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Collection, Product, File, Basket, Order, OrderLine
+from .models import Collection, Product, File, Basket, Order, OrderLine, StripeCustomer
 
 
 @admin.register(Collection)
@@ -7,6 +7,11 @@ class CollectionAdmin(admin.ModelAdmin):
     list_display = ('catname', 'slug')
     prepopulated_fields = {'slug': ('catname',)}
     search_fields = ('catname',)
+
+
+@admin.register(StripeCustomer)
+class StripeCustomerAdmin(admin.ModelAdmin):
+    list_display = ('user', 'stripe_id')
 
 
 @admin.register(Product)
