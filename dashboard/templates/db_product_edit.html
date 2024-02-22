@@ -12,10 +12,22 @@
                     Back to Product List
                 </a>
             </small>
-            <h1>Edit Product</h1>
         </div>
 
-        <div class="col-sm-12 col-md-6">
+        <div class="col-9 text-start my-auto">
+            <h1>Edit &gt; {{ product.sku }}</h1>
+        </div>
+        <div class="col-3 text-end my-auto">
+            <a href="{% url 'product_detail' sku=product.sku %}">
+                View <i class="fa-solid fa-square-arrow-up-right"></i>
+            </a>
+        </div>
+
+        <div class="col-sm-12 col-md-12">
+            <hr>
+        </div>
+
+        <div class="col-sm-12 col-md-6 py-3">
             
             <h5>Product Details:</h5>
 
@@ -35,19 +47,12 @@
                     <small>Updated:<br>{{ product.updated }}</small>
                 </div>
             </div>
-            <hr>
-            <!-- Delete button with confirmation prompt -->
-            <form method="post" action="{% url 'db_product_delete' pk=product.pk %}" onsubmit="return confirm('Are you sure you want to delete this product?');">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-danger">Delete Product</button>
-            </form>
-            <hr>
 
         </div>
 
         <div class="col-sm-12 col-md-1"></div>
 
-        <div class="col-sm-12 col-md-5">
+        <div class="col-sm-12 col-md-5 py-3">
             <h5>Product Image:</h5>
             <p class="text-danger">
                 <small>Only one product image is allowed at this time.</small>
@@ -70,6 +75,18 @@
                     <button type="submit">Upload</button>
                 </form>
             {% endif %}
+        </div>
+
+        <div class="col-12">
+            <hr>
+        </div>
+
+        <div class="col-12 text-end">
+            <!-- Delete button with confirmation prompt -->
+            <form method="post" action="{% url 'db_product_delete' pk=product.pk %}" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-danger">Delete Product</button>
+            </form>
         </div>
     </div>
 </div>

@@ -5,6 +5,6 @@
 <ul>
     <li><a href="{% url 'shop_index' %}"><strong>All products</strong></a></li>
     {% for item in menu_items %}
-        <li><a href="/collection/{{ item.slug }}">{{ item.catname }}</a></li>
+        <li><a href="/collection/{{ item.slug }}"><i class="fa-solid fa-screwdriver-wrench"></i> {{ item.catname }}</a></li>
     {% endfor %}
 </ul>

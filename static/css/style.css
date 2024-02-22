@@ -30,6 +30,13 @@ body h1 {
   letter-spacing: 1px;
 }
 
+main {
+  background: linear-gradient(0deg, rgba(229, 229, 229, 0) 0%, rgba(229, 229, 229, 0.5) 66%, rgb(229, 229, 229) 100%);
+}
+main a {
+  color: #DF0029;
+}
+
 #errorlist {
   font-size: 12px;
   color: red;
@@ -101,6 +108,37 @@ form textarea {
   display: block;
   width: 100%;
   padding: 8px;
+}
+
+.card .card-body {
+  padding: 0 16px;
+}
+.card .card-body .card-text .sku {
+  opacity: 0.5;
+}
+.card .card-footer {
+  color: #DF0029;
+}
+
+.edit_product {
+  display: inline-block;
+  background-color: #5D3FD3;
+  color: #fff;
+  font-size: 12px;
+  width: auto;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  border-radius: 24px;
+  padding: 0 8px;
+  opacity: 0.9;
+}
+.edit_product:hover {
+  opacity: 1;
+}
+.edit_product::before {
+  content: "Edit";
+  margin-right: 4px;
 }
 
 .product_image {

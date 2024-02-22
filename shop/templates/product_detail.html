@@ -8,10 +8,21 @@
 <div class="container">
     <div class="row">
 
-        <div class="col-12 pb-5">    
+        <div class="col-6 text-start">    
             <small>
                 <a href="{% url 'shop_index' %}">All Products </a> &gt; <a href="{% url 'shop_collection' product.category.slug|lower %}">{{ product.category }}</a> &gt; {{ product.sku }}
             </small>
+        </div>
+
+        <div class="col-6 text-end">
+            {% if user.is_authenticated and user.is_staff %}
+                <a href="{% url 'db_product_edit' sku=product.sku %}" class="edit_product">
+                    <i class="fa-solid fa-pencil"></i>
+                </a>
+            {% endif %}
+        </div>
+
+        <div class="col-12 py-3">
         </div>
 
         <div class="col-sm-12 col-md-5">
