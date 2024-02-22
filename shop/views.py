@@ -222,7 +222,7 @@ def create_checkout_session(request):
         # Guest checkout...
 
     if request.method == 'GET':
-        domain_url = 'http://localhost:8000/'
+        domain_url = 'https://ivankrause-ci-project5-4b20229f1d0d.herokuapp.com/'
         stripe.api_key = settings.STRIPE_SECRET_KEY
         try:
             # Create new Checkout Session for the order
@@ -261,7 +261,8 @@ def stripe_webhook(request):
     stripe.api_key = settings.STRIPE_SECRET_KEY
     endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
     payload = request.body
-    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    # sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    sig_header = request.headers.get('Stripe-Signature')
     event = None
 
     try:
