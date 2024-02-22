@@ -141,9 +141,9 @@
                             <div class="text-center">
                                 <hr>
                                 {% if user_delivery_address %}
-                                <a id="submitBtn" class="btn btn-success btn-block w-100" href="{% url 'shop_checkout' %}">
+                                <button id="submitBtn" class="btn btn-success btn-block w-100">
                                     PLACE ORDER
-                                </a>
+                                </button>
                                 {% else %}
                                 <button type="button" class="btn btn-light w-100" data-bs-toggle="modal" data-bs-target="#myAddress">
                                     PLACE ORDER
@@ -199,7 +199,6 @@ fetch("/config/")
   // new
   // Event handler
   document.querySelector("#submitBtn").addEventListener("click", () => {
-    alert('clicked');
     // Get Checkout Session ID
     fetch("/create-checkout-session/")
     .then((result) => { return result.json(); })
