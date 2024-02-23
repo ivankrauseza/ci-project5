@@ -42,6 +42,12 @@ main {
 }
 
 // Error Handling :
+.errorlist {
+    list-style:circle;
+    color: #DF0029;
+    font-size: 12px;
+    margin: 16px;
+}
 #errorlist {
     font-size: 12px;
     color: red;
