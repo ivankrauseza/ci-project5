@@ -1,10 +1,19 @@
+<button class="btn btn-primary d-md-none mb-3" id="toggleListBtn">Toggle List</button>
 
-<h6 class="py-2">
-    Collections:
-</h6>
-<ul>
-    <li><a href="{% url 'shop_index' %}"><strong>All products</strong></a></li>
+<div class="d-none d-sm-block" id="myList">
+<div class="list-group mb-3">
+    <a class="list-group-item list-group-item-action" href="{% url 'shop_index' %}"><strong>All products</strong></a>
     {% for item in menu_items %}
-        <li><a href="/collection/{{ item.slug }}"><i class="fa-solid fa-screwdriver-wrench"></i> {{ item.catname }}</a></li>
+        <a class="list-group-item list-group-item-action" href="{% url 'shop_collection' item.slug %}">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+             {{ item.catname }}
+        </a>
     {% endfor %}
-</ul>
+</div>
+</div>
+
+<script>
+    document.getElementById('toggleListBtn').addEventListener('click', function () {
+      document.getElementById('myList').classList.toggle('d-none');
+    });
+  </script>
