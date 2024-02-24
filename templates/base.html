@@ -20,7 +20,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <script src="https://js.stripe.com/v3/"></script>
 </head>
-<body class="bg-secondary-subtle">
+<body>
     
     <header class="container-fluid">
         <div class="row bg-danger p-3">
@@ -66,15 +66,16 @@
         </div>
     </main>
 
-    <footer class="container-fluid p-3">
+    <footer class="container-fluid p-4">
         <div class="row">
-            <div class="col-12">
-                    <ul class="footer_menu">
-                        <li>
-                            <strong>
-                                &copy; Cadence Tools 2024
-                            </strong>
-                        </li>
+            <div class="col-sm-12 text-center">
+                <a href="{% url 'shop_index' %}">
+                    <img src="https://bmie23a.s3.eu-west-1.amazonaws.com/bmdb/Media/logo_cadence.png" height="16" alt="Logo">
+                </a>
+            </div>
+            <div class="col-sm-12">
+                <nav class="footer_menu">
+                    <ul>
                         <li>
                             <a href="{% url 'about' %}">
                                 About Us
@@ -86,17 +87,26 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{% url 'contact' %}">
-                                Contact Us
-                            </a>
-                        </li>
-                        <li>
                             <a href="{% url 'privacy' %}">
                                 Privacy Policy
                             </a>
                         </li>
+                        <li>
+                            <a href="{% url 'contact' %}">
+                                Contact Us
+                            </a>
+                        </li>
                     </ul>
                 </nav>
+            </div>
+            <div class="col-12">
+                <hr>
+            </div>
+            <div class="col-sm-12 col-md-6 text-sm-center text-md-start py-3 my-auto">
+                &copy; Cadence Tools 2024
+            </div>
+            <div class="col-sm-12 col-md-6 text-sm-center text-md-end py-3 my-auto">
+                Created by: Ivan Krause
             </div>
         </div>
     </footer>

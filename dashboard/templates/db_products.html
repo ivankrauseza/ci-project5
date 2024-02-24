@@ -6,7 +6,12 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h1>Dashboard</h1>
+            <small>
+                <a href="{% url 'db_index' %}">
+                    Dashboard
+                </a>
+            </small>
+            <h1>Products</h1>
 
             <div class="row">
                 <div class="col-6 my-auto">
@@ -14,7 +19,7 @@
                 </div>
                 <div class="col-6 my-auto text-end">
                     <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Create New Product
+                        New Item <i class="fa-solid fa-plus"></i>
                     </button>
                 </div>
             </div>
@@ -61,12 +66,10 @@
                 <form method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
+                    <hr>
                     <button type="submit">Create Product</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
