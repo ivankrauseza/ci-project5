@@ -18,7 +18,9 @@ def product_items(collection_slug=None, order_by=None):
         collections = None
         products = Product.objects.all()
 
-    if order_by == 'asc':
+    if order_by == '':
+        products = products.order_by('')
+    elif order_by == 'asc':
         products = products.order_by('price')
     elif order_by == 'desc':
         products = products.order_by('-price')
