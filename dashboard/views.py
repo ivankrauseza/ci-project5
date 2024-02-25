@@ -113,7 +113,7 @@ def DashboardProductDelete(request, pk):
 # Account update :
 @login_required
 def DashboardOrder(request):
-    orders = Order.objects.all()
+    orders = Order.objects.all().order_by('-created_at')
     return render(request, "db_orders.html", {'orders': orders})
 
 

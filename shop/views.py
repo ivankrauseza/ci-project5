@@ -327,7 +327,8 @@ def stripe_webhook(request):
             customer_email=str(customer_email),
             total_amount=total_amount_decimal,
             currency=str(currency),
-            status='paid'
+            status='received',
+            paid='true'
         )
         order.save()
 

@@ -128,6 +128,7 @@ class Order(models.Model):
     total_amount = models.DecimalField(max_digits=10, decimal_places=2, null=True)  # Total amount charged
     currency = models.CharField(max_length=3, null=True)  # Currency code, e.g., 'USD'
     status = models.CharField(max_length=30, default='pending', null=True)  # Order status (e.g., pending, paid, fulfilled, canceled)
+    paid = models.BooleanField(default=False)
 
     def __str__(self):
         return f"Order {self.order_id}"
