@@ -170,6 +170,10 @@ AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
+# Common settings for both development and production
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 # Use local static files during development
 if DEBUG:
     STATIC_URL = '/static/'
@@ -180,10 +184,7 @@ else:
     # Use S3 bucket for static files in production
     AWS_S3_CUSTOM_DOMAIN = f'{os.environ.get(AWS_STORAGE_BUCKET_NAME)}.s3.amazonaws.com'
     STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/cadence/static/"
-
-# Common settings for both development and production
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}.s3.amazonaws.com/cadence/media/'
 
 
 # Default primary key field type
