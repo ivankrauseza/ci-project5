@@ -23,14 +23,15 @@ def product_items(collection_slug=None, order_by=None):
     elif order_by == 'desc':
         products = products.order_by('-price')
     else:
-        # Handle the case where order_by is not provided
-        # Default to no specific ordering
-        pass
+        products = Product.objects.all()
 
     # Fetch related images for each product
     for product in products:
         image = File.objects.filter(product=product).first()
-        product.image_url = image.file.url if image and default_storage.exists(image.file.name) else None
+        if image and default_storage.exists(image.file.name):
+            product.image_url = image.file.url
+        else:
+            product.image_url = None
 
     return {
         'product_items': products,
