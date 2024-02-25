@@ -24,7 +24,11 @@
         <div class="col-sm-12 col-md-12 col-lg-12">
 
             {% load product_tags %}
-            {% product_items order_by=request.GET.order_by %}
+            {% if request.GET.order_by %}
+                {% product_items order_by=request.GET.order_by %}
+            {% else %}
+                {% product_items %}
+            {% endif %}
             
         </div>
     </div>

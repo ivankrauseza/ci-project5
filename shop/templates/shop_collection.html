@@ -16,13 +16,13 @@
             <h1>{{ collection.catname }}</h1>
         </div>
         
-        <div class="col-2">
+        <div class="col-12">
             {% load menu_tags %}
             {% menu_items %}
 
         </div>
         
-        <div class="col-10">
+        <div class="col-12">
             {% load product_tags %}
             {% product_items collection_slug=collection.slug order_by=request.GET.order_by %}
         </div>

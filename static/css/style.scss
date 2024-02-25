@@ -1,6 +1,7 @@
 body {
     margin: 0;
     background-color: #333;
+    font-size: 14px;
 
     a {
         text-decoration: none;
@@ -144,12 +145,24 @@ form {
         padding: 0 16px;
         .card-text {
             .sku {
-                opacity: 0.5;
+                text-transform: uppercase;
+                font-weight: 700;
+                font-size: 1em;
+            }
+            .title {
+                font-weight: 400;
+                font-size: 0.9em;
+                line-height: 125%;
             }
         }
     }
     .card-footer {
         color:#DF0029;
+        .price {
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 1.5em;
+        }
     }
 }
 .edit_product {

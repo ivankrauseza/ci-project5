@@ -41,7 +41,7 @@
                                     {{ product.sku }}
                                 </sub>
                                 <br>
-                                <strong>
+                                <strong class="title">
                                     {% if product.name %}
                                         {{ product.name }}
                                     {% else %}
@@ -51,7 +51,9 @@
                             </small>
                         </div>
                         <div class="card-footer bg-white border-0">
-                            &euro; {{ product.price }}
+                            <span class="price">
+                                &euro; {{ product.price }}
+                            </span>
                         </div>
                       
                     </div>

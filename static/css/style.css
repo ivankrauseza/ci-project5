@@ -1,6 +1,7 @@
 body {
   margin: 0;
   background-color: #333;
+  font-size: 14px;
 }
 body a {
   text-decoration: none;
@@ -128,10 +129,22 @@ form textarea {
   padding: 0 16px;
 }
 .card .card-body .card-text .sku {
-  opacity: 0.5;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1em;
+}
+.card .card-body .card-text .title {
+  font-weight: 400;
+  font-size: 0.9em;
+  line-height: 125%;
 }
 .card .card-footer {
   color: #DF0029;
+}
+.card .card-footer .price {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1.5em;
 }
 
 .edit_product {

@@ -1,26 +1,17 @@
-<button class="btn btn-primary d-md-none mb-3" id="toggleListBtn">Toggle List</button>
-
-
-<div class="container-fluid d-none d-sm-block" id="myList">
-  <div class="row g-1">
-    <div class="col-2 text-center">
-      <a class="list-group-item list-group-item-action" href="{% url 'shop_index' %}"><strong>All products</strong></a>
-    </div>
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Collection
+  </button>
+  <ul class="dropdown-menu">
+    <li>
+      <a class="dropdown-item" href="{% url 'shop_index' %}"><strong>All products</strong></a>
+    </li>
     {% for item in menu_items %}
-      <div class="col-2 text-center p3">
-        <a class="border d-block" href="{% url 'shop_collection' item.slug %}">
-          <i class="fa-solid fa-screwdriver-wrench"></i>
-          <br>
-          {{ item.catname }}
-        </a>
-      </div>
-      {% endfor %}
-  </div>
+    <li>
+      <a class="dropdown-item" href="{% url 'shop_collection' item.slug %}">
+        {{ item.catname }}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
 </div>
-
-
-<script>
-    document.getElementById('toggleListBtn').addEventListener('click', function () {
-      document.getElementById('myList').classList.toggle('d-none');
-    });
-  </script>
