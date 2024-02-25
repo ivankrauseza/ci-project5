@@ -22,8 +22,6 @@ def product_items(collection_slug=None, order_by=None):
         products = products.order_by('price')
     elif order_by == 'desc':
         products = products.order_by('-price')
-    else:
-        products = Product.objects.all()
 
     # Fetch related images for each product
     for product in products:

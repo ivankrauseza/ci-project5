@@ -24,11 +24,7 @@
         <div class="col-sm-12 col-md-12 col-lg-12">
 
             {% load product_tags %}
-            {% if order_by %}
-                {% product_items order_by=order_by %}
-            {% else %}
-                {% product_items %}
-            {% endif %}
+            {% product_items order_by=order_by %}
             
         </div>
     </div>
