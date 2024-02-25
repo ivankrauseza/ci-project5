@@ -23,7 +23,7 @@
 <body>
     
     <header class="container-fluid">
-        <div class="row bg-danger p-3">
+        <div class="row p-3">
             <div class="col-6 text-start my-auto">
                 <a href="{% url 'shop_index' %}">
                     <img src="https://bmie23a.s3.eu-west-1.amazonaws.com/bmdb/Media/logo_cadence.png" height="16" alt="Logo">
@@ -150,8 +150,13 @@
                             </strong>
                         </li>
                         <li>
+                            <a href="{% url 'db_orders' %}">
+                                Customer Orders
+                            </a>
+                        </li>
+                        <li>
                             <a href="{% url 'db_products' %}">
-                                List of products
+                                Product Managers
                             </a>
                         </li>
                     </ul>

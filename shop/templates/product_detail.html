@@ -6,15 +6,15 @@
 
 {% block content %}
 <div class="container">
-    <div class="row">
+    <div class="row g-5">
 
-        <div class="col-6 text-start">    
+        <div class="col-sm-12 col-md-6 text-start">    
             <small>
                 <a href="{% url 'shop_index' %}">All Products </a> &gt; <a href="{% url 'shop_collection' product.category.slug|lower %}">{{ product.category }}</a> &gt; {{ product.sku }}
             </small>
         </div>
 
-        <div class="col-6 text-end">
+        <div class="col-sm-12 col-md-6 text-end">
             {% if user.is_authenticated and user.is_staff %}
                 <a href="{% url 'db_product_edit' sku=product.sku %}" class="edit_product">
                     <i class="fa-solid fa-pencil"></i>
@@ -22,58 +22,79 @@
             {% endif %}
         </div>
 
-        <div class="col-12 py-3">
-        </div>
-
-        <div class="col-sm-12 col-md-5">
+        <div class="col-sm-12 col-md-7 text-center">
             {% if product_image_url %}
-                <img src="{{ product_image_url }}" alt="{{ product.name }}">
+                <img class="shadow-sm" src="{{ product_image_url }}" alt="{{ product.name }}">
             {% else %}
                 <img src="https://bmie23a.s3.eu-west-1.amazonaws.com/placeholders/product_image.jpg" alt="no image">
             {% endif %}
         </div>
-        <div class="col-sm-12 col-md-1"></div>
-        <div class="col-sm-12 col-md-6">
-            <p>{{ product.brand }}</p>
+
+        <div class="col-sm-12 col-md-5 text-start">
+            <small>{{ product.brand }}</small>
             <h1>{{ product.name }}</h1>
-            <p class="text-secondary pb-3"><small>SKU: <strong>{{ product.sku }}</strong></small></p>
+            <p class="text-secondary pb-2"><small>SKU: <strong>{{ product.sku }}</strong></small></p>
             <p>{{ product.blurb }}</p>
             <h3 class="text-danger">
                 &euro;  {{ product.price }}
             </h3>
-            <p class="text-secondary">
-                <strong>Stock: {{ product.stock }} Available</strong>
-            </p>
+            <sup class="text-secondary">
+                <strong>{{ product.stock }}</strong> Available
+            </sup>
 
+            <div class="border bg-white rounded py-2 my-3 add_to_basket">
             {% if user.is_authenticated %}
                 {% if product_in_basket %}
-                <p class="text-success"><i class="fa-solid fa-check"></i> This product is in your <a href="{% url 'shop_basket' %}">basket</a>.</p>
+                    <p class="text-success">
+                        <i class="fa-solid fa-check"></i> 
+                        This product is in your <a href="{% url 'shop_basket' %}">basket</a>.
+                    </p>
                 {% else %}
                 <form method="post" action="{% url 'product_detail' sku=product.sku %}">
                     {% csrf_token %}
-                    <div class="row g-1">
-                        <div class="col-1 text-center no-gutters">
-                            <button class="btn btn-light w-100" type="button" onclick="decrement()">&minus;</button>
-                        </div>
-                        <div class="col-2 text-center">
-                            {{ form.as_p }}
-                        </div>
-                        <div class="col-1 text-center">
-                            <button class="btn btn-light w-100" type="button" onclick="increment()">&plus;</button>
-                        </div>
-                        <div class="col-8 text-left">
-                            <button class="btn btn-primary" type="submit">Add to Basket</button>
+                    <div class="container">
+                        <div class="row g-0">
+                            <div class="col-md-6 text-center my-2">
+
+                                <div class="container-fluid">
+                                    <div class="row g-0">            
+                                        <div class="col-3 text-center">
+                                            <button class="btn px-0 w-100" type="button" onclick="decrement()">
+                                                <i class="fa-solid fa-circle-chevron-left"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-6 text-center">
+                                            {{ form.as_p }}
+                                        </div>
+                                        <div class="col-3 text-center">
+                                            <button class="btn px-0 w-100" type="button" onclick="increment()">
+                                                <i class="fa-solid fa-circle-chevron-right"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 my-2 text-center">
+                                <button class="btn btn-success w-100" type="submit">Add to Basket</button>
+                            </div>
                         </div>
                     </div>
                 </form>
                 <div id="errorlist"></div>
-                {% endif %}
+            {% endif %}
             {% else %}
-            <hr>
-                <p>Please <a href="{% url 'account_login' %}">log in</a> to add this product to your cart.</p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <small>Please <a href="{% url 'account_login' %}">log in</a> to add this product to your cart.</small>
+                        </div>
+                    </div>
+                </div>
             {% endif %}
         </div>
-        <div class="col-12 py-3">
+        </div>
+        <div class="col-sm-12 col-md-12 px-4 text-start">
             <h5>Additional Information</h5>
             <p>{{ product.desc }}</p>
         </div>

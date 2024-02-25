@@ -12,6 +12,29 @@
                 </a>
             </small>
             <h1>Orders</h1>
+
+            {% if user.is_authenticated %}
+                <ul>
+                    <li>
+                        <hr>
+                    </li>
+                    {% for order in orders %}
+                        <li>
+                            <a href="{% url 'db_order_detail' order.order_id %}">
+                                Order No. {{ order.order_id }}
+                                <br>
+                                <sup>{{ order.created_at }}</sup>
+                            </a>
+                        </li>
+                        <li>
+                            <hr>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Please <a href="{% url 'login' %}">log in</a> to access this page.</p>
+            {% endif %}
+
         </div>
     </div>
 </div>

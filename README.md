@@ -108,3 +108,7 @@ To do...
 
 
 ## Bugs
+
+## Credits and Resources
+- https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html
+- https://fontawesome.com

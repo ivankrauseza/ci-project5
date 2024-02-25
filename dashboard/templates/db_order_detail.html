@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+
+            <small>
+                <a href="{% url 'db_orders' %}">
+                    All Orders
+                </a>
+            </small>
+            
+            <h1>Order No.: {{ order.order_id }}</h1>
+            
+<ul>
+    <li><hr></li>
+    {% for basket_line in basket_lines %}
+    <li>
+        <div class="row">
+            <div class="col-9">
+                {{ basket_line.product }}
+                <br>
+                <small>(Unit Price: <strong>&euro; {{ basket_line.price }}</strong> * Quantity: <strong>{{ basket_line.quantity }}</strong>)</small>
+            </div>
+            <div class="col-3 text-end">
+                &euro; {{ basket_line.total_cost }}
+            </div>
+        </div></li>
+    <li><hr></li>
+        <!-- Add more fields as needed -->
+    {% endfor %}
+</ul>
+<p>Total: {{ order.total_amount }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+    console.log('test');
+</script>
+{% endblock postloadjs %}

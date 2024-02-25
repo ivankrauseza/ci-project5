@@ -11,6 +11,7 @@ urlpatterns = [
     path('products/<int:pk>/delete/', views.DashboardProductDelete, name='db_product_delete'),
     path('products/delete/', views.DashboardProductDelete, name='db_product_delete'),
     path('orders/', views.DashboardOrder, name='db_orders'),
+    path('orders/detail/<int:order_id>/', views.DashboardOrderDetail, name='db_order_detail'),
     path('product/edit/<sku>/', DashboardProductEdit.as_view(), name='db_product_edit'),
     # path('product/delete_file/<file_id>/', DeleteFileView.as_view(), name='delete_file'),
     path('delete_file/<int:file_id>/', FileDeleteView.as_view(), name='delete_file'),

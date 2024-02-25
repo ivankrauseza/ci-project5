@@ -39,14 +39,16 @@ def ProductDetail(request, sku):
     max_quantity = int(Product.objects.get(sku=sku).stock)
     form = AddToBasketForm(max_quantity, request.POST)
 
-    
     # Logged In - Get Stripe ID :
     try:
-        customer = StripeCustomer.objects.get(user=request.user)
-        scid = customer.stripe_id
-
-    # Logged Out :
+        if request.user.is_authenticated:
+            customer = StripeCustomer.objects.get(user=request.user)
+            scid = customer.stripe_id
+        else:
+            customer = None
+            scid = None
     except StripeCustomer.DoesNotExist:
+        customer = None
         scid = None
 
     if request.user.is_authenticated:

@@ -1,7 +1,8 @@
+from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
-from shop.models import Product, File
+from shop.models import Product, File, Order, Basket
 from shop.forms import ProductCreateForm, ProductUpdateForm, FileForm
 from django.http import HttpResponseBadRequest
 
@@ -109,6 +110,21 @@ def DashboardProductDelete(request, pk):
     return render(request, 'db_product_delete.html')
 
 
-# Dashboard orders :
+# Account update :
+@login_required
 def DashboardOrder(request):
-    return render(request, 'db_orders.html')
+    orders = Order.objects.all()
+    return render(request, "db_orders.html", {'orders': orders})
+
+
+# Account update :
+@login_required
+def DashboardOrderDetail(request, order_id):
+    order = get_object_or_404(Order, order_id=order_id)
+
+    # Check for BasketLines with the same document number (order_id)
+    basket_lines = Basket.objects.filter(document=order_id)
+    for basket_line in basket_lines:
+        basket_line.total_cost = basket_line.quantity * basket_line.price
+
+    return render(request, 'db_order_detail.html', {'order': order, 'basket_lines': basket_lines})
