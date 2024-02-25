@@ -24,9 +24,7 @@
         <div class="col-sm-12 col-md-12 col-lg-12">
 
             {% load product_tags %}
-            {% with order_by=request.GET.order_by|default:"created" %}
-                {% product_items order_by=order_by %}
-            {% endwith %}
+            {% product_items order_by="created" %}
             
         </div>
     </div>
