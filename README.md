@@ -111,4 +111,5 @@ To do...
 
 ## Credits and Resources
 - https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html
+- https://testdriven.io/blog/storing-django-static-and-media-files-on-amazon-s3/
 - https://fontawesome.com

@@ -17,7 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-l%87ytl4ckqdq!(%wnv@^c=+4r8ii1y@c5*brs$e3gzbuy=%vv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG')
 
 ALLOWED_HOSTS = ['localhost', 'ivankrause-ci-project5-4b20229f1d0d.herokuapp.com']
 
@@ -185,6 +185,7 @@ else:
     AWS_S3_CUSTOM_DOMAIN = f'{os.environ.get(AWS_STORAGE_BUCKET_NAME)}.s3.amazonaws.com'
     STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/cadence/static/"
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}.s3.amazonaws.com/cadence/media/'
+
 
 
 # Default primary key field type
