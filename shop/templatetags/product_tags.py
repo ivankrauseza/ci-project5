@@ -25,7 +25,7 @@ def product_items(collection_slug=None, order_by=None):
     else:
         # Handle the case where order_by is not provided
         # Default to no specific ordering
-        products = products.all()
+        pass
 
     # Fetch related images for each product
     for product in products:
