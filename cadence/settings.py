@@ -6,18 +6,11 @@ import dj_database_url
 if os.path.isfile('env.py'):
     import env
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-l%87ytl4ckqdq!(%wnv@^c=+4r8ii1y@c5*brs$e3gzbuy=%vv'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG')
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', 'ivankrause-ci-project5-4b20229f1d0d.herokuapp.com']
 
@@ -159,7 +152,6 @@ USE_I18N = True
 USE_TZ = True
 
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
@@ -167,25 +159,19 @@ AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME')
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-# Common settings for both development and production
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# For development
+if DEBUG:
+    STATICFILES_DIRS = [BASE_DIR / "static"]
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+    STATIC_URL = "static/"
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Use local static files during development
-if os.environ.get(DEBUG):
-    STATIC_URL = '/static/'
-    STATICFILES_DIRS = [
-        BASE_DIR / 'static',
-    ]
+# For production
 else:
-    # Use S3 bucket for static files in production
-    AWS_S3_CUSTOM_DOMAIN = f'{os.environ.get(AWS_STORAGE_BUCKET_NAME)}.s3.amazonaws.com'
-    STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/cadence/static/"
-    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}.s3.amazonaws.com/cadence/media/'
-
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/'
 
 
 # Default primary key field type
