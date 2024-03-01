@@ -3,10 +3,11 @@
 {% block title %}Shop{% endblock %}
 
 {% block content %}
-<div class="container-fluid">
+
+<div class="container">
     <div class="row">
         
-        <div class="col-12">
+        <div class="col-12 pb-5"> 
             <h1>Basket</h1>
         </div>
 
@@ -31,7 +32,7 @@
                                 <tr>
                                     {% if basket_item.product %}
                                         <td>
-                                            <a href="/products/{{ basket_item.product.sku }}">
+                                            <a href="/products/{{ basket_item.product.sku }}/">
                                                 <strong>{{ basket_item.product.name }}</strong>
                                                 <br>
                                                 <sup>{{ basket_item.product.sku }}</sup>
@@ -42,7 +43,7 @@
                                     <td class="text-center px-2">
                                         
             <button type="button" class="btn btn-sm text-primary" data-bs-toggle="modal" data-bs-target="#updateQuantityModal{{ basket_item.id }}">
-                {{ basket_item.quantity }}
+                {{ basket_item.qty }}
               </button>
               <!-- Modal -->
               <div class="modal fade" id="updateQuantityModal{{ basket_item.id }}" tabindex="-1" aria-labelledby="updateQuantityModalLabel{{ basket_item.id }}" aria-hidden="true">
@@ -55,7 +56,7 @@
                       <div class="modal-body">
                         <form method="post" action="{% url 'update_basket_item' basket_item.id %}">
                           {% csrf_token %}
-                          <input type="number" name="quantity" class="form-control" value="{{ basket_item.quantity }}" min="1" max="{{ basket_item.product.stock }}">
+                          <input type="number" name="qty" class="form-control" value="{{ basket_item.qty }}" min="1" max="{{ basket_item.product.stock }}">
                           <button type="submit" class="btn btn-primary mt-3">Update</button>
                         </form>
                       </div>
@@ -88,7 +89,7 @@
     <br>
     {{ user_delivery_address.phone }}
     <br>
-    {{ user_delivery_address.street_address }}
+    {{ user_delivery_address.street }}
     <br>
     {{ user_delivery_address.city }}, {{ user_delivery_address.state }}, {{ user_delivery_address.postal_code }}
     <br>
@@ -141,13 +142,14 @@
                             <div class="text-center">
                                 <hr>
                                 {% if user_delivery_address %}
-                                <button id="submitBtn" class="btn btn-success btn-block w-100">
-                                    PLACE ORDER
-                                </button>
+
+                                    <button id="submitBtn" class="btn btn-success btn-block w-100">
+                                        PLACE ORDER
+                                    </button>
                                 {% else %}
-                                <button type="button" class="btn btn-light w-100" data-bs-toggle="modal" data-bs-target="#myAddress">
-                                    PLACE ORDER
-                                </button>
+                                    <button type="button" class="btn btn-light w-100" data-bs-toggle="modal" data-bs-target="#myAddress">
+                                        PLACE ORDER
+                                    </button>
                                 {% endif %}
                                 <hr>
                                 <sup class="text-danger">VAT included (23%)</sup>
@@ -155,8 +157,9 @@
                         </div>
                     </div>
                 </div>
+                  
                 {% else %}
-                    <p>Your basket is empty.</p>
+                    <p class="bg-secondary-subtle p-3 rounded">Your basket is currently empty - <a href="{% url 'shop_index' %}">View products</a>.</p>
                 {% endif %}
             </div>
             
@@ -183,34 +186,8 @@
       </div>
     </div>
   </div>
-
   
 {% endblock %}
 
 {% block postloadjs %}
-<script>
-// Get Stripe publishable key
-fetch("/config/")
-.then((result) => { return result.json(); })
-.then((data) => {
-  // Initialize Stripe.js
-  const stripe = Stripe(data.publicKey);
-
-  // new
-  // Event handler
-  document.querySelector("#submitBtn").addEventListener("click", () => {
-    // Get Checkout Session ID
-    fetch("/create-checkout-session/")
-    .then((result) => { return result.json(); })
-    .then((data) => {
-      console.log(data);
-      // Redirect to Stripe Checkout
-      return stripe.redirectToCheckout({sessionId: data.sessionId})
-    })
-    .then((res) => {
-      console.log(res);
-    });
-  });
-});
-</script>
 {% endblock postloadjs %}

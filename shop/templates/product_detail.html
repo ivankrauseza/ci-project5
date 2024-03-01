@@ -10,7 +10,11 @@
 
         <div class="col-sm-12 col-md-6 text-start">    
             <small>
-                <a href="{% url 'shop_index' %}">All Products </a> &gt; <a href="{% url 'shop_collection' product.category.slug|lower %}">{{ product.category }}</a> &gt; {{ product.sku }}
+                <a href="{% url 'shop_index' %}">All Products </a> 
+                {% if product.category.slug %}
+                &gt; <a href="{% url 'shop_collection' product.category.slug|lower %}">{{ product.category }}</a>
+                {% endif %}
+                &gt; {{ product.sku }}
             </small>
         </div>
 
@@ -22,15 +26,15 @@
             {% endif %}
         </div>
 
-        <div class="col-sm-12 col-md-7 text-center">
+        <div class="col-sm-12 col-md-6 text-center">
             {% if product_image_url %}
-                <img class="shadow-sm" src="{{ product_image_url }}" alt="{{ product.name }}">
+                <img src="{{ product_image_url }}" alt="{{ product.name }}">
             {% else %}
                 <img src="https://bmie23a.s3.eu-west-1.amazonaws.com/placeholders/product_image.jpg" alt="no image">
             {% endif %}
         </div>
 
-        <div class="col-sm-12 col-md-5 text-start">
+        <div class="col-sm-12 col-md-6 text-start">
             <small>{{ product.brand }}</small>
             <h1>{{ product.name }}</h1>
             <p class="text-secondary pb-2"><small>SKU: <strong>{{ product.sku }}</strong></small></p>
@@ -45,16 +49,16 @@
             <div class="border bg-white rounded py-2 my-3 add_to_basket">
             {% if user.is_authenticated %}
                 {% if product_in_basket %}
-                    <p class="text-success">
+                    <span class="text-success px-2">
                         <i class="fa-solid fa-check"></i> 
                         This product is in your <a href="{% url 'shop_basket' %}">basket</a>.
-                    </p>
+                    </span>
                 {% else %}
                 <form method="post" action="{% url 'product_detail' sku=product.sku %}">
                     {% csrf_token %}
                     <div class="container">
                         <div class="row g-0">
-                            <div class="col-md-6 text-center my-2">
+                            <div class="col-md-5 text-center my-2">
 
                                 <div class="container-fluid">
                                     <div class="row g-0">            
@@ -75,13 +79,13 @@
                                 </div>
                             </div>
                             
-                            <div class="col-md-6 my-2 text-center">
+                            <div class="col-md-7 my-2 text-center">
                                 <button class="btn btn-success w-100" type="submit">Add to Basket</button>
                             </div>
                         </div>
                     </div>
                 </form>
-                <div id="errorlist"></div>
+                <div class="px-3" id="errorlist"></div>
             {% endif %}
             {% else %}
                 <div class="container">
@@ -94,10 +98,12 @@
             {% endif %}
         </div>
         </div>
-        <div class="col-sm-12 col-md-12 px-4 text-start">
-            <h5>Additional Information</h5>
-            <p>{{ product.desc }}</p>
-        </div>
+        {% if product.desc %}
+            <div class="col-sm-12 col-md-12 px-4 text-start">
+                <h5>Additional Information</h5>
+                <p>{{ product.desc }}</p>
+            </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
@@ -105,12 +111,12 @@
 {% block postloadjs %}
 <script>
     function increment() {
-        var quantityField = document.getElementById("id_quantity");
+        var quantityField = document.getElementById("id_qty");
         quantityField.value = parseInt(quantityField.value) + 1;
     }
 
     function decrement() {
-        var quantityField = document.getElementById("id_quantity");
+        var quantityField = document.getElementById("id_qty");
         var currentValue = parseInt(quantityField.value);
         if (currentValue > 1) {
             quantityField.value = currentValue - 1;

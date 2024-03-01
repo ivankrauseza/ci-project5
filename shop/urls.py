@@ -14,9 +14,11 @@ urlpatterns = [
     path('products/<str:sku>/', views.ProductDetail, name='product_detail'),
     path('collection/', views.ShopCollection, name='shop_collection'),
     path('collection/<slug:collection_slug>/', views.ShopCollection, name='shop_collection'),
+    # Stripe
     path('config/', views.stripe_config),
     path('create-checkout-session/', views.create_checkout_session),
     path('success/', views.SuccessView.as_view()),
     path('cancelled/', views.CancelledView.as_view()),
-    path('webhook/', views.stripe_webhook)
+    path('webhook/', views.stripe_webhook),
+    
 ]

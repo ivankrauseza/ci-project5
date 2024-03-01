@@ -1,6 +1,7 @@
+{% if menu_items %}
 <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Collection
+  <button class="btn dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa-solid fa-filter"></i> Collection
   </button>
   <ul class="dropdown-menu">
     <li>
@@ -9,9 +10,11 @@
     {% for item in menu_items %}
     <li>
       <a class="dropdown-item" href="{% url 'shop_collection' item.slug %}">
-        {{ item.catname }}
+        {{ item.name }}
       </a>
     </li>
     {% endfor %}
   </ul>
 </div>
+{% else %}
+{% endif %}

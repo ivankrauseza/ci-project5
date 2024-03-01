@@ -1,12 +1,12 @@
 from django.contrib import admin
-from .models import Collection, Product, File, Basket, Order, OrderLine, StripeCustomer
+from .models import Collection, Product, File, Basket, Transaction, Order, StripeCustomer, OrderDeliveryAddress
 
 
 @admin.register(Collection)
 class CollectionAdmin(admin.ModelAdmin):
-    list_display = ('catname', 'slug')
-    prepopulated_fields = {'slug': ('catname',)}
-    search_fields = ('catname',)
+    list_display = ('name', 'slug')
+    prepopulated_fields = {'slug': ('name',)}
+    search_fields = ('name',)
 
 
 @admin.register(StripeCustomer)
@@ -27,10 +27,10 @@ class FileAdmin(admin.ModelAdmin):
     search_fields = ('product__sku', 'file', 'type', 'description')
 
 
-@admin.register(Basket)
-class BasketAdmin(admin.ModelAdmin):
-    list_display = ('user', 'product', 'product_sku', 'quantity', 'price', 'created_at')
-    search_fields = ('user__username', 'product_sku')
+@admin.register(Transaction)
+class TransactionAdmin(admin.ModelAdmin):
+    list_display = ('user', 'product', 'sku', 'qty', 'price', 'created_at')
+    search_fields = ('user__username', 'sku')
     list_filter = ('created_at', 'user')
 
     def user_username(self, obj):
@@ -38,18 +38,11 @@ class BasketAdmin(admin.ModelAdmin):
     user_username.short_description = 'User'
 
 
-class OrderLineInline(admin.TabularInline):
-    model = OrderLine
-    extra = 1
-
-
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('order_id',)
-    inlines = [OrderLineInline]
+    list_display = ('oid',)
 
 
-@admin.register(OrderLine)
-class OrderLineAdmin(admin.ModelAdmin):
-    list_display = ('order', 'product_sku', 'quantity', 'price')
-    search_fields = ('order__order_number', 'product_sku')
+@admin.register(OrderDeliveryAddress)
+class OrderDeliveryAddressAdmin(admin.ModelAdmin):
+    list_display = ('user',)

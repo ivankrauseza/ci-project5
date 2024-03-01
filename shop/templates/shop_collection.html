@@ -6,20 +6,11 @@
 <div class="container">
     <div class="row">
 
-        <div class="col-12 pb-5">    
+        <div class="col-12 text-center">    
             <small>
-                <a href="{% url 'shop_index' %}">All Products</a> &gt; <strong>{{ collection.catname }}</strong>
-            </small>
-        </div>
-
-        <div class="col-12 pb-5">   
-            <h1>{{ collection.catname }}</h1>
-        </div>
-        
-        <div class="col-12">
-            {% load menu_tags %}
-            {% menu_items %}
-
+                <a href="{% url 'shop_index' %}">All Products</a> &gt; <strong>{{ collection.name }}</strong>
+            </small> 
+            <h1>{{ collection.name }}</h1>
         </div>
         
         <div class="col-12">

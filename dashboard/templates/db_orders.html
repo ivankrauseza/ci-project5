@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 text-center">
             <small>
                 <a href="{% url 'db_index' %}">
                     Dashboard
@@ -13,15 +13,19 @@
             </small>
             <h1>Orders</h1>
 
+        </div>
+        <div class="col-12 text-start">
+
             {% if user.is_authenticated %}
                 <ul>
                     <li>
                         <hr>
                     </li>
+                    {% if orders %}
                     {% for order in orders %}
                         <li>
-                            <a href="{% url 'db_order_detail' order.order_id %}">
-                                Order No. {{ order.order_id }}
+                            <a href="{% url 'db_order_detail' order.oid %}">
+                                Order No. {{ order.oid }}
                                 <br>
                                 <sup>{{ order.created_at }}</sup>
                             </a>
@@ -32,6 +36,11 @@
                             <hr>
                         </li>
                     {% endfor %}
+                    {% else %}
+                        <p class="bg-light p-3 rounded text-center">
+                            No orders available.
+                        </p>
+                    {% endif %}
                 </ul>
             {% else %}
                 <p>Please <a href="{% url 'login' %}">log in</a> to access this page.</p>

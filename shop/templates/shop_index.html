@@ -6,25 +6,23 @@
 <div class="container">
     <div class="row">
 
-        <div class="col-12 pb-5">    
-            <small>All products</small>
+        <div class="col-12">  
+            <div class="row">
+                <div class="col-12 my-auto text-center"> 
+                    <h1>All Products</h1>
+                    {% if user.is_authenticated and user.is_staff %}
+                        <a href="{% url 'db_products' %}" class="edit_product">
+                            Products
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
         </div>
 
-        <div class="col-12 pb-5">   
-            <h1>All Products</h1>
-        </div>
-
-        <div class="col-sm-12 col-md-12 col-lg-12">
-
-            
-            {% load menu_tags %}
-            {% menu_items %}
-
-        </div>
         <div class="col-sm-12 col-md-12 col-lg-12">
 
             {% load product_tags %}
-            {% product_items order_by=order_by %}
+            {% product_items order_by=request.GET.order_by %}
             
         </div>
     </div>

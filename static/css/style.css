@@ -38,7 +38,7 @@ header {
 }
 
 main {
-  background: linear-gradient(0deg, rgba(240, 240, 240, 0) 0%, rgba(240, 240, 240, 0.5) 75%, rgb(240, 240, 240) 100%);
+  background-color: #fff;
   min-height: 90vh;
 }
 main a {

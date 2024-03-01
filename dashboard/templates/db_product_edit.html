@@ -26,27 +26,22 @@
         <div class="col-sm-12 col-md-12">
             <hr>
         </div>
+        
+        <div class="col-12 text-center py-3">
+            <small>Created: {{ product.created }}</small> / 
+            <small>Last saved: {{ product.updated }}</small>
+        </div>
 
         <div class="col-sm-12 col-md-6 py-3">
             
             <h5>Product Details:</h5>
-
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ product_form.as_p }}
-                <button type="submit">Submit</button>
+                <button class="btn btn-primary" type="submit">Save Product</button>
             </form>
             
             <hr>
-
-            <div class="row">
-                <div class="col-sm-6 text-start">
-                    <small>Created:<br>{{ product.created }}</small>
-                </div>
-                <div class="col-sm-6 text-start">
-                    <small>Updated:<br>{{ product.updated }}</small>
-                </div>
-            </div>
 
         </div>
 
@@ -72,7 +67,7 @@
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ file_form.as_p }}
-                    <button type="submit">Upload</button>
+                    <button class="btn btn-secondary" type="submit">Upload</button>
                 </form>
             {% endif %}
         </div>
@@ -130,6 +125,16 @@
                 });
             }
         });
+
+        var checkbox = $('#id_blocked');
+        var statusText = document.createElement('span');
+        if (checkbox.is(':checked')) {
+            checkbox.addClass('form-check-input');
+        }
+        else {
+            checkbox.addClass('form-check-input');
+        }
+
     });
 </script>
 {% endblock postloadjs %}

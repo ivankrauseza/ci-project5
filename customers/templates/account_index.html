@@ -9,23 +9,36 @@
             <h1>Account</h1>
             {% if user.is_authenticated %}
                 <p>Welcome, {{ user.username }}!</p>
+
+                <div class="container">
+                    <div class="row mb-5">
+                        <div class="col-6 text-center">
+                            <h5>
+                                <a href="{% url 'shop_index' %}">
+                                    <i class="fa-solid fa-shop"></i>
+                                    <br>
+                                    View Products
+                                </a>
+                            </h5>
+                        </div>
+                        <div class="col-6 text-center">
+                            <h5>
+                                <a href="{% url 'account_orders' %}">
+                                    <i class="fa-solid fa-list"></i>
+                                    <br>
+                                    My Orders
+                                </a>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
                 
                 <!-- Allauth account management links for logged-in users -->
                 <ul>
                     
             <li>
                 <a href="{% url 'account_update' %}">
-                    Update Account
-                </a>
-            </li>
-            <li>
-                <a href="{% url 'account_orders' %}">
-                    My Orders
-                </a>
-            </li>
-            <li>
-                <a href="{% url 'account_delete' %}">
-                    Delete Account
+                    Update Account (nothing)
                 </a>
             </li>
             
@@ -35,6 +48,12 @@
                     <li><a href="{% url 'account_logout' %}">Logout</a></li>
                     <!-- Add more links as needed -->
                 </ul>
+
+                <hr>
+
+                <a href="{% url 'account_delete' %}">
+                    Delete Account
+                </a>
                 
             {% else %}
                 <p>Please log in to access your account management options.</p>

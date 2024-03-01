@@ -12,28 +12,92 @@
                     My Orders
                 </a>
             </small>
+            </div>
+
             
-            <h1>Order No.: {{ order.order_id }}</h1>
-            
-<ul>
-    <li><hr></li>
-    {% for basket_line in basket_lines %}
-    <li>
-        <div class="row">
-            <div class="col-9">
-                {{ basket_line.product }}
+<div class="col-12">
+{% if user.is_authenticated and not user.is_staff %}
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-12 py-3">
+            <h1>Order No.: {{ order.oid }}</h1>
+        </div>
+
+        <div class="col-6">
+            <p>
+                Order Date
                 <br>
-                <small>(Unit Price: <strong>&euro; {{ basket_line.price }}</strong> * Quantity: <strong>{{ basket_line.quantity }}</strong>)</small>
-            </div>
-            <div class="col-3 text-end">
-                &euro; {{ basket_line.total_cost }}
-            </div>
-        </div></li>
-    <li><hr></li>
-        <!-- Add more fields as needed -->
-    {% endfor %}
-</ul>
-<p>Total: {{ order.total_amount }}</p>
+                <strong>{{ order.created_at }}</strong>
+            </p>
+            <p>
+                <strong>Delivery Details:</strong>
+                <br>
+                {{ order.oda }}
+            </p>
+        </div>
+        <div class="col-6 text-end">
+            <p>
+                <small>Payment Status</small>
+                <br>
+                <strong>{{ order.paid }}</strong>
+            </p>
+            <p>
+                <small>Order Status:</small>
+                <br>
+                <strong>{{ order.status }}</strong>
+            </p>
+        </div>
+
+        <div class="col-12 py-3">
+        </div>
+    </div>
+</div>
+       
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h5>Purchase Items:</h5>
+            <hr>
+            <ul>
+                {% for basket_line in basket_lines %}
+                <li>
+                    <div class="row">
+                        <div class="col-9">
+                            <strong>{{ basket_line.product }}</strong>
+                            <br>
+                            <small>(Unit Price: <strong>&euro; {{ basket_line.price }}</strong> * Quantity: <strong>{{ basket_line.qty }}</strong>)</small>
+                        </div>
+                        <div class="col-3 text-end">
+                            &euro; {{ basket_line.total_cost }}
+                        </div>
+                    </div></li>
+                <li><hr></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-end">
+            <h6>Total: {{ order.total_amount }}</h6>
+        </div>
+    </div>
+</div>
+
+{% else %}
+<!-- Display a message when no products are found -->
+<p class="bg-light p-3 rounded text-center">
+    You need to be logged in to view this page.
+</p>
+{% endif %}
+            
+
         </div>
     </div>
 </div>

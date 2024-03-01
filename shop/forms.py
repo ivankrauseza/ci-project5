@@ -57,7 +57,7 @@ class ProductUpdateForm(forms.ModelForm):
 class AddToBasketForm(forms.Form):
     def __init__(self, max_quantity, *args, **kwargs):
         super(AddToBasketForm, self).__init__(*args, **kwargs)
-        self.fields['quantity'] = forms.IntegerField(
+        self.fields['qty'] = forms.IntegerField(
             initial='1',
             label='',
             widget=forms.NumberInput(attrs={
@@ -74,26 +74,29 @@ class AddToBasketForm(forms.Form):
         )
 
     def clean_quantity(self):
-        quantity = self.cleaned_data['quantity']
+        qty = self.cleaned_data['qty']
         try:
             # Try to convert the input to an integer
-            quantity = int(quantity)
+            qty = int(qty)
         except ValueError:
             # If conversion fails, raise a validation error
             raise forms.ValidationError('Enter a valid number.')
-        return quantity
+        return qty
     
 
 class OrderDeliveryAddressForm(forms.ModelForm):
     # Change street_address to CharField with widget=forms.TextInput
-    street_address = forms.CharField(required=True, widget=forms.TextInput(attrs={'placeholder': 'Street Address'}))
+    street = forms.CharField(required=True, widget=forms.TextInput(attrs={'placeholder': 'Street Address'}))
+    name = forms.CharField(label='Contact Person')
+    phone = forms.CharField(label='Contact Number')
+    street = forms.CharField(label='Street Address')
 
     class Meta:
         model = OrderDeliveryAddress
         fields = [
             'name',
             'phone',
-            'street_address',
+            'street',
             'city',
             'state',
             'postal_code',

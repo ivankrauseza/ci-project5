@@ -58,16 +58,19 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">New Item</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- Create Product -->
+                <p>
+                    To create a new product, first enter at SKU (Stock Keep Unit) which is the unique identifier for your product. 
+                    Click 'Create Product' once you have entered the SKU.
+                </p>
                 <form method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
                     <hr>
-                    <button type="submit">Create Product</button>
+                    <button type="submit" class="btn btn-success">Create Product</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </form>
             </div>

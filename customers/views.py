@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from shop.models import Order, StripeCustomer, Basket
+from shop.models import Order, StripeCustomer, Transaction
 
 from django.contrib.auth.decorators import login_required
 
@@ -34,7 +34,7 @@ def AccountOrders(request):
     
     # If the StripeCustomer exists, retrieve orders associated with the stripe_id
     if stripe_customer:
-        orders = Order.objects.filter(customer_id=stripe_customer.stripe_id)
+        orders = Order.objects.filter(sid=stripe_customer.stripe_id)
     else:
         # If no StripeCustomer, you might want to handle this case accordingly
         orders = []
@@ -44,12 +44,12 @@ def AccountOrders(request):
 
 # Account update :
 @login_required
-def AccountOrderDetail(request, order_id):
-    order = get_object_or_404(Order, order_id=order_id)
+def AccountOrderDetail(request, oid):
+    order = get_object_or_404(Order, oid=oid)
 
-    # Check for BasketLines with the same document number (order_id)
-    basket_lines = Basket.objects.filter(document=order_id)
+    # Check for BasketLines with the same document number (oid)
+    basket_lines = Transaction.objects.filter(oid=oid)
     for basket_line in basket_lines:
-        basket_line.total_cost = basket_line.quantity * basket_line.price
+        basket_line.total_cost = basket_line.qty * basket_line.price
 
     return render(request, 'account_order_detail.html', {'order': order, 'basket_lines': basket_lines})
