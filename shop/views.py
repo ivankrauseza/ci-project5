@@ -378,5 +378,33 @@ def stripe_webhook(request):
             basket_item.oid = sequence
             basket_item.type = "S"
             basket_item.save()
+        
+        # Then send confirmation email :
+        def send_order_confirmation_email(customer_email, oid):
+
+            sender_email = os.environ.get('EMAIL_SEND')
+            sender_password = os.environ.get('EMAIL_KEY')
+
+            subject = "Order Confirmation"
+            body = f"Dear Customer,\n\nYour order with ID {oid} has been successfully processed.\n\nBest Regards,\nYour Team"
+
+            message = MIMEMultipart()
+            message['From'] = sender_email
+            message['To'] = customer_email  # customer_email
+            message['Subject'] = subject
+            message.attach(MIMEText(body, 'plain'))
+
+            try:
+                server = smtplib.SMTP('smtp.gmail.com', 587)
+                server.starttls()
+                server.login(sender_email, sender_password)
+                server.sendmail(sender_email, customer_email, message.as_string())
+                server.close()
+                print("Email sent successfully!")
+            except Exception as e:
+                print(f"Error: {e}")
+
+        # Call the email function after saving the order
+        send_order_confirmation_email('ivan.krause@gmail.com', sequence)
 
     return HttpResponse(status=200)
