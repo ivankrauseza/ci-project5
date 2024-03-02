@@ -19,6 +19,13 @@ urlpatterns = [
             content_type="text/plain"
             ),
     ),
+    path(
+        "sitemap.xml",
+        TemplateView.as_view(
+            template_name="sitemap.xml",
+            content_type="text/plain"
+            ),
+    ),
 ]
 
 if settings.DEBUG:

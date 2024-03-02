@@ -1,7 +1,6 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django import forms
 from .models import Product, OrderDeliveryAddress, File
-from django.contrib import messages
 
 
 class FileForm(forms.ModelForm):

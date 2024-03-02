@@ -154,7 +154,8 @@ Core Stylesheet test and no errors:
 ![https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/css_validation.jpg](https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/css_validation.jpg)
 
 #### PEP8
-I have tested my code using https://www.pythonchecker.com/ and there are some issues where the errors refer to spacing around operators. Example: ('/') where it has recommended that I put a space around the operator like (' / ') which obviously breaks the path. I also received errors where the indentation should be 4 spaces but VS Code is tabbing the indentations but the code works fine according to the VSCode linter.  
+I have tested my code using https://www.pythonchecker.com/ and there are some issues where the errors refer to spacing around operators. Example: ('/') where it has recommended that I put a space around the operator like (' / ') which obviously breaks the path. I also received errors where the indentation should be 4 spaces but VS Code is tabbing the indentations but the code works fine according to the VSCode linter. Generally the checker is repeating the same errors and nothing stands out after testing several views, form, models blocks of python code. Maybe I am doing something wrong. 
+![https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/pep8_validation.jpg](https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/pep8_validation.jpg)
 
 #### Lighthouse
 Overall, the Lighthouse test performed reasonably ok, across all pages.  
