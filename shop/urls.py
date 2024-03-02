@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+
 urlpatterns = [
     path('', views.ShopIndex, name='shop_index'),
     path('search/', views.ShopSearch, name='shop_search'),
@@ -19,5 +20,4 @@ urlpatterns = [
     path('success/', views.SuccessView.as_view()),
     path('cancelled/', views.CancelledView.as_view()),
     path('webhook/', views.stripe_webhook),
-    
 ]
