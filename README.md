@@ -146,10 +146,12 @@ Manual testing was performed to validate that the Authentication and the E-comme
 
 ### Validator Testing 
 #### W3C HTML
-To do...
+Several pages were test and passed the validation without errors:
+![https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/html_validation.jpg](https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/html_validation.jpg)
 
 #### W3C CSS
-To do...
+Core Stylesheet test and no errors:
+![https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/css_validation.jpg](https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/css_validation.jpg)
 
 #### PEP8
 I have tested my code using https://www.pythonchecker.com/ and there are some issues where the errors refer to spacing around operators. Example: ('/') where it has recommended that I put a space around the operator like (' / ') which obviously breaks the path. I also received errors where the indentation should be 4 spaces but VS Code is tabbing the indentations but the code works fine according to the VSCode linter.  
@@ -160,6 +162,7 @@ Overall, the Lighthouse test performed reasonably ok, across all pages.
 
 
 ## Bugs
+I do not understand the built in Sitemap generator yet so I used an external generator.
 
 ## Deployment
 ### Deployment to Heroku
@@ -174,11 +177,13 @@ Overall, the Lighthouse test performed reasonably ok, across all pages.
 
 ## Credits and Resources
 ### Walkthroughs for inspiration
+- [My Previous CI Project 4](https://github.com/ivankrauseza/ci-project4)
 - Code Institute Walkthroughs: (Hello Django, I think therefore I blog, Boutique Ado)
 - [Learning Django](https://www.linkedin.com/learning/learning-django-2/rapidly-create-web-applications)
 - [MDN - Local Library](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Tutorial_local_library_website)
 - [AWS S3](https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html)
 - [AWS S3 - Static Files](https://testdriven.io/blog/storing-django-static-and-media-files-on-amazon-s3/)
-- https://learndjango.com/tutorials/add-robotstxt-django-website#:~:text=To%20implement%20a%20robots.,a%20new%20app%20called%20pages%20.&text=Immediately%20add%20it%20to%20your%20INSTALLED_APPS%20setting.&text=Then%20create%20a%20custom%20view,on%20the%20built%2Din%20TemplateView%20.
-- https://learndjango.com/tutorials/customizing-django-404-and-500-error-pages
-- https://www.xml-sitemaps.com/
+- [Django Stripe Integration](https://testdriven.io/blog/django-stripe-tutorial/)
+- [robots.txt](https://learndjango.com/tutorials/add-robotstxt-django-website#:~:text=To%20implement%20a%20robots.,a%20new%20app%20called%20pages%20.&text=Immediately%20add%20it%20to%20your%20INSTALLED_APPS%20setting.&text=Then%20create%20a%20custom%20view,on%20the%20built%2Din%20TemplateView%20.)
+- [404 and 500 error pages](https://learndjango.com/tutorials/customizing-django-404-and-500-error-pages)
+- [Sitemap Generator](https://www.xml-sitemaps.com/)
