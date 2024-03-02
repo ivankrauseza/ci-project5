@@ -39,11 +39,8 @@
                 data-bs-toggle="offcanvas" 
                 data-bs-target="#offcanvasLeft" 
                 aria-controls="offcanvasLeft">
-                <i class="fa-solid fa-bars"></i> MENU
+                <i class="fa-solid fa-bars"></i> <img src="https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/logo_cadence.svg" height="24" alt="Logo">
                 </button>
-                <a href="{% url 'shop_index' %}">
-                    <img src="https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/logo_cadence.svg" height="32" alt="Logo">
-                </a>
             </div>
             <div class="col-6 text-end my-auto">
                 {% if user.is_authenticated %}
@@ -56,8 +53,8 @@
                         <i class="fa-solid fa-user"></i>
                     </button>
                 {% else %}
-                    <a class="btn text-white" href="{% url 'account_login' %}">
-                        <small class="px-1">Login</small> <i class="fa-regular fa-user"></i>
+                    <a class="btn text-white px-0" href="{% url 'account_login' %}">
+                        <small>Login/Sign Up</small>
                     </a>
                     <!-- Add more social login links as needed -->
                 {% endif %}
@@ -74,9 +71,9 @@
     </header>
 
 
-    <main class="container-fluid bg-white">
+    <main class="container-fluid bg-white py-5">
         <div class="row">
-            <div class="col-12 py-4">
+            <div class="col-12">
                 {% block content %}{% endblock %}
             </div>
         </div>
@@ -101,32 +98,6 @@
                     <img src="https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/logo_cadence.svg" height="24" alt="Logo">
                 </a>
             </div>
-            <div class="col-sm-12">
-                <nav class="footer_menu">
-                    <ul>
-                        <li>
-                            <a href="{% url 'about' %}">
-                                About Us
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'terms' %}">
-                                Terms and Conditions
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'privacy' %}">
-                                Privacy Policy
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'contact' %}">
-                                Contact Us
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
             <div class="col-12 py-3 text-center">
                 <div class="social_icon">
                     <a href="https://www.facebook.com/profile.php?id=61556553647901" target="_blank" rel="nofollow noreferrer">
@@ -134,14 +105,45 @@
                     </a>
                 </div>
             </div>
+            <div class="col-sm-12">
+                <nav class="footer_menu">
+
+                    <div class="container footer_nav">
+                        <div class="row my-3">
+                            <div class="col-3 my-auto text-center">
+                                <a href="{% url 'about' %}">
+                                    About
+                                </a>
+                            </div>
+                            <div class="col-3 my-auto text-center">
+                                <a href="{% url 'terms' %}">
+                                    Legal
+                                </a>
+                            </div>
+                            <div class="col-3 my-auto text-center">
+                                <a href="{% url 'privacy' %}">
+                                    Privacy
+                                </a>
+                            </div>
+                            <div class="col-3 my-auto text-center">
+                                <a href="{% url 'contact' %}">
+                                    Contact
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
             <div class="col-12">
                 <hr>
             </div>
-            <div class="col-sm-12 col-md-6 text-sm-center text-md-start py-3 my-auto">
-                &copy; Cadence Tools 2024
+            <div class="col-12 py-2">
             </div>
-            <div class="col-sm-12 col-md-6 text-sm-center text-md-end py-3 my-auto">
-                Created by: Ivan Krause
+            <div class="col-6 text-start my-auto">
+                &copy; Cadence 2024
+            </div>
+            <div class="col-6 text-end my-auto">
+                Made by: Ivan Krause
             </div>
         </div>
     </footer>
@@ -150,7 +152,7 @@
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasLeft" aria-labelledby="offcanvasLeftLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasLeftLabel">
-                <i class="fa-solid fa-bars"></i> Menu
+                <img src="https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/logo_cadence.svg" height="32" alt="Logo">
             </h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
@@ -160,12 +162,12 @@
             <ul>
                 <li>
                     <a class="btn" href="{% url 'shop_index' %}">
-                        All Products
+                        <i class="fa-solid fa-house"></i> All Products
                     </a>
                 </li>
                 <li>
                     <a class="btn" href="{% url 'shop_collection_list' %}">
-                        Collections
+                        <i class="fa-solid fa-grip"></i> Collections
                     </a>
                 </li>
             </ul>
@@ -177,22 +179,22 @@
                 <ul>
                     <li>
                         <a class="btn" href="{% url 'about' %}">
-                            About Us
+                            <i class="fa-solid fa-circle-info"></i> About Us
                         </a>
                     </li>
                     <li>
                         <a class="btn" href="{% url 'terms' %}">
-                            Terms and Conditions
+                            <i class="fa-solid fa-gavel"></i> Terms and Conditions
                         </a>
                     </li>
                     <li>
                         <a class="btn" href="{% url 'privacy' %}">
-                            Privacy Policy
+                            <i class="fa-solid fa-shield-halved"></i> Privacy Policy
                         </a>
                     </li>
                     <li>
                         <a class="btn" href="{% url 'contact' %}">
-                            Contact Us
+                            <i class="fa-solid fa-at"></i> Contact Us
                         </a>
                     </li>
                 </ul>

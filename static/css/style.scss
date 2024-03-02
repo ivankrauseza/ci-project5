@@ -234,24 +234,18 @@ footer {
         display: flex;
         align-items: center;
         justify-content: center;
-        ul {
-            margin:1em 0;
-            padding: 0;
-            list-style: none;
-            width: auto;
-            li {
-                float: left;
-                width: auto;
-                margin: 8px;
-                a {
-                    color: #fff;
-                    opacity: 0.75;
-                    text-transform: uppercase;
-                    letter-spacing: 1px;
-                    &:hover {
-                        opacity: 1;
-                    }
-                }
+        .footer_nav {
+            width: 100%;
+            margin: 0 auto;
+            max-width: 480px;
+        }
+        a {
+            color: #fff;
+            opacity: 0.75;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            &:hover {
+                opacity: 1;
             }
         }
     }
