@@ -35,7 +35,9 @@
             <p>
                 <strong>Delivery Details:</strong>
                 <br>
-                {{ order.oda }}
+                <div id="odaStr">
+                    {{ order.oda }}
+                </div>
             </p>
         </div>
         <div class="col-6 text-end">
@@ -60,7 +62,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h5>Purchase Items:</h5>
+            <h5>Purchased Items:</h5>
             <hr>
             <ul>
                 {% for basket_line in basket_lines %}

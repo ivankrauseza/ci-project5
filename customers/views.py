@@ -34,12 +34,12 @@ def AccountOrders(request):
     
     # If the StripeCustomer exists, retrieve orders associated with the stripe_id
     if stripe_customer:
-        orders = Order.objects.filter(sid=stripe_customer.stripe_id)
+        orders = Order.objects.filter(sid=stripe_customer.stripe_id).order_by('-created_at')
     else:
         # If no StripeCustomer, you might want to handle this case accordingly
         orders = []
 
-    return render(request, "account_orders.html", {'orders': orders})
+    return render(request, "account_orders.html", {'orders': orders}) 
 
 
 # Account update :

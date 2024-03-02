@@ -16,6 +16,8 @@
             <h1>
                 My Orders
             </h1>
+            </div>
+        <div class="col-12 text-start">
 
  {% if user.is_authenticated %}
                 <ul>
@@ -55,6 +57,26 @@
 
 {% block postloadjs %}
 <script>
-    console.log('test');
-</script>
+    $(document).ready(function() {
+      // Get the original string
+      var odaStr = $("#odaStr").text();
+
+      // Function to insert <br> tag before specified substring
+      function odaLineBreak(substring) {
+        var index = odaStr.indexOf(substring);
+        if (index !== -1) {
+          odaStr = odaStr.slice(0, index) + "<br>" + odaStr.slice(index);
+        }
+      }
+
+      // Insert <br> tags before specified substrings
+      odaLineBreak("Phone:");
+      odaLineBreak("Address:");
+      odaLineBreak("Postal Code:");
+      odaLineBreak("Country:");
+
+      // Update the HTML with the reformatted string
+      $("#odaStr").html(odaStr);
+    });
+  </script>
 {% endblock postloadjs %}
