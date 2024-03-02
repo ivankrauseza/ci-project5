@@ -12,7 +12,13 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'ivankrause-ci-project5-4b20229f1d0d.herokuapp.com']
+SITE_ID = 1
+
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'ivankrause-ci-project5-4b20229f1d0d.herokuapp.com'
+    ]
 
 
 # Application definition

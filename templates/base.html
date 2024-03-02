@@ -22,9 +22,17 @@
 </head>
 <body>
     
-    <header class="container-fluid">
-        <div class="row p-3">
+    <header class="container-fluid bg-danger" id="hdr">
+        <div class="row py-3">
             <div class="col-6 text-start my-auto">
+                <button 
+                class="btn text-white" 
+                type="button" 
+                data-bs-toggle="offcanvas" 
+                data-bs-target="#offcanvasLeft" 
+                aria-controls="offcanvasLeft">
+                <i class="fa-solid fa-bars"></i> MENU
+                </button>
                 <a href="{% url 'shop_index' %}">
                     <img src="https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/logo_cadence.svg" height="32" alt="Logo">
                 </a>
@@ -66,6 +74,18 @@
         </div>
     </main>
 
+    <div class="container-fluid bg-warning">
+        <div class="row">
+            <div class="col-12 text-center py-3">
+                <a class="btn" href="{% url 'shop_newsletter' %}">
+                    <strong>
+                        Click Here to Join our Monthly Newsletter
+                    </strong>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <footer class="container-fluid p-4">
         <div class="row">
             <div class="col-sm-12 text-center">
@@ -99,6 +119,13 @@
                     </ul>
                 </nav>
             </div>
+            <div class="col-12 py-3 text-center">
+                <div class="social_icon">
+                    <a href="https://www.facebook.com/profile.php?id=61556553647901" target="_blank" rel="nofollow noreferrer">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                </div>
+            </div>
             <div class="col-12">
                 <hr>
             </div>
@@ -111,11 +138,88 @@
         </div>
     </footer>
 
+    <!--DEFAULT NAVIGATION-->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasLeft" aria-labelledby="offcanvasLeftLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasLeftLabel">
+                <i class="fa-solid fa-bars"></i> Menu
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            {% if user.is_authenticated %}
+
+            <h6>Our store</h6>
+            <ul>
+                <li>
+                    <a class="btn" href="{% url 'account_index' %}">
+                        All Products
+                    </a>
+                </li>
+                <li>
+                    <a class="btn" href="{% url 'shop_collection_list' %}">
+                        Collections
+                    </a>
+                </li>
+            </ul>
     
+                <hr>
+
+                <h6>Information</h6>
+                
+                <ul>
+                    <li>
+                        <a class="btn" href="{% url 'about' %}">
+                            About Us
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn" href="{% url 'terms' %}">
+                            Terms and Conditions
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn" href="{% url 'privacy' %}">
+                            Privacy Policy
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn" href="{% url 'contact' %}">
+                            Contact Us
+                        </a>
+                    </li>
+                </ul>
+    
+                {% if user.is_authenticated and user.is_staff %}
+                        <ul>
+                            <li>
+                                <strong>
+                                    Dashboard (logged in Admin)
+                                </strong>
+                            </li>
+                            <li>
+                                <a href="{% url 'db_orders' %}">
+                                    Customer Orders
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'db_products' %}">
+                                    Product Managers
+                                </a>
+                            </li>
+                        </ul>
+                    {% else %}
+                    {% endif %}
+    
+            {% endif %}
+        </div>
+        </div>
+
+    <!--USER NAVIGATION-->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasRightLabel">
-            <i class="fa-solid fa-gear"></i> <strong>Settings</strong>
+            <i class="fa-solid fa-gear"></i> Settings
         </h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Shop{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+
+        <div class="col-12 text-center">    
+            <small>
+                <a href="{% url 'shop_index' %}">All Products</a> &gt; Collections</strong>
+            </small> 
+            <h1>Collections</h1>
+        </div>
+        
+        <div class="col-12">
+            collectionList
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+    console.log('test');
+</script>
+{% endblock postloadjs %}

@@ -95,9 +95,17 @@ def ProductDetail(request, sku):
 
 
 # Shop collection :
+def ShopCollectionList(request):
+    return render(request, 'shop_collection_list.html')
+
+
+# Shop collection :
 def ShopCollection(request, collection_slug=None):
     collection = get_object_or_404(Collection, slug=collection_slug)
-    return render(request, 'shop_collection.html', {'collection': collection})
+    context = {
+        'collection': collection
+    }
+    return render(request, 'shop_collection.html', context)
 
 
 # Shop search :
@@ -219,6 +227,11 @@ def ShopOrder(request):
 # Shop customer : - Not used
 def ShopAccount(request):
     return render(request, 'shop_account.html')
+
+
+# Shop collection :
+def Newsletter(request):
+    return render(request, 'shop_newsletter.html')
 
 
 class SuccessView(TemplateView):

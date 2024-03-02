@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Error: 404
+{% endblock %}
+
+{% block content %}
+  <div class="container my-5">
+    <div class="row py-5">
+      <div class="col-12 text-center">
+        <h1><strong>Woops!</strong></h1>
+        <small>Error Code: 404</small>
+        <h5>
+          The page you were looking for cannot be found
+        </h5>
+        <p>
+            Click <a href="{% url 'account_orders' %}">here</a> to return to the home page.
+        </p>
+      </div>
+    </div>
+  </div>  
+{% endblock %}
