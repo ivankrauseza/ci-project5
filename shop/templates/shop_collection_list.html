@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %}Shop{% endblock %}
+{% block title %}Shop > Collections{% endblock %}
+{% block meta_keywords %}
+    Collections
+{% endblock %}
+{% block meta_desc %}
+    {{ collection.name }} 
+{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -14,7 +20,24 @@
         </div>
         
         <div class="col-12">
-            collectionList
+
+            <div class="container">
+                <div class="row my-5">
+                    <div class="col-6 col-md-2 p-2">
+                        <a class="btn border rounded p-3 w-100" href="{% url 'shop_index' %}">
+                            <strong>All products</strong>
+                        </a>
+                    </div>
+                    {% for item in collection %}
+                    <div class="col-6 col-md-2 p-2">
+                        <a class="btn border rounded p-3 w-100" href="{% url 'shop_collection' item.slug %}">
+                            {{ item.name }}
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

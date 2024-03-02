@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}
-    {{ product.name }}
+{% block title %}{{ product.name }}{% endblock %}
+{% block meta_keywords %}
+{{ product.name }}, {{ product.category }}, {{ product.sku }}
+{% endblock %}
+{% block meta_desc %}
+    {{ product.blurb }} 
 {% endblock %}
 
 {% block content %}

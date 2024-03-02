@@ -96,7 +96,12 @@ def ProductDetail(request, sku):
 
 # Shop collection :
 def ShopCollectionList(request):
-    return render(request, 'shop_collection_list.html')
+    collection = Collection.objects.all()
+
+    context = {
+        'collection': collection
+    }
+    return render(request, 'shop_collection_list.html', context)
 
 
 # Shop collection :
