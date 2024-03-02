@@ -7,25 +7,29 @@
     <div class="row">
         <div class="col-12">
             <h1>Dashboard</h1>
-            <ul>
-                <li>
-                    <a href="{% url 'db_products' %}">
-                        Products
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'db_orders' %}">
-                        Customer orders
-                    </a>
-                </li>
-            </ul>
+
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-6 col-md-2 p-2">
+                        <a class="btn border rounded p-3 w-100" href="{% url 'db_products' %}">
+                                <i class="fa-solid fa-shop"></i>
+                                <br>
+                                Manage Products 
+                            </a>
+                    </div>
+                    <div class="col-6 col-md-2 p-2">
+                        <a class="btn border rounded p-3 w-100" href="{% url 'db_orders' %}">
+                                <i class="fa-solid fa-list"></i>
+                                <br>
+                                Manage Orders
+                            </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 {% endblock %}
 
 {% block postloadjs %}
-<script>
-    console.log('test');
-</script>
 {% endblock postloadjs %}

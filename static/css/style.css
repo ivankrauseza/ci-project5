@@ -32,6 +32,10 @@ body h1 {
   letter-spacing: 1px;
 }
 
+.logged_in_staff {
+  background-color: #5D3FD3;
+}
+
 header#hdr {
   background: rgb(223, 0, 41);
   background: linear-gradient(90deg, rgb(223, 0, 41) 0%, rgb(131, 29, 29) 100%);

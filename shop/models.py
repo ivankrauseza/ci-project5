@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
 
@@ -57,8 +58,8 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, default='0.00')
     category = models.ForeignKey(Collection, on_delete=models.SET_NULL, null=True, blank=True)
     brand = models.CharField(max_length=255, default='cadence')
-    created = models.DateTimeField(default=timezone.now)
-    updated = models.DateTimeField(default=timezone.now)
+    created = models.DateTimeField(auto_now_add=True, null=True)
+    updated = models.DateTimeField(auto_now=True)
     blocked = models.BooleanField(default=False)
     type_choices = [
         ('PHYSICAL', 'Physical'),

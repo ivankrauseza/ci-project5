@@ -25,6 +25,11 @@
 </head>
 <body>
     
+    {% if user.is_authenticated and user.is_staff %}
+    <div class="logged_in_staff px-3 py-1 text-white text-center">
+        You are logged in as a Staff member
+    </div>
+    {% endif %}
     <header class="container-fluid bg-danger" id="hdr">
         <div class="row py-3">
             <div class="col-6 text-start my-auto">
@@ -150,12 +155,11 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            {% if user.is_authenticated %}
 
             <h6>Our store</h6>
             <ul>
                 <li>
-                    <a class="btn" href="{% url 'account_index' %}">
+                    <a class="btn" href="{% url 'shop_index' %}">
                         All Products
                     </a>
                 </li>
@@ -192,29 +196,6 @@
                         </a>
                     </li>
                 </ul>
-    
-                {% if user.is_authenticated and user.is_staff %}
-                        <ul>
-                            <li>
-                                <strong>
-                                    Dashboard (logged in Admin)
-                                </strong>
-                            </li>
-                            <li>
-                                <a href="{% url 'db_orders' %}">
-                                    Customer Orders
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{% url 'db_products' %}">
-                                    Product Managers
-                                </a>
-                            </li>
-                        </ul>
-                    {% else %}
-                    {% endif %}
-    
-            {% endif %}
         </div>
         </div>
 
