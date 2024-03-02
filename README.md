@@ -1,5 +1,8 @@
-# ci-project5
-Code Institute Diploma in Full Stack Software Development - Project 5
+# ci-project5 - Cadence Tools
+For my Project 5 at the Code Institute I have created 
+
+## Objective
+The main aim of this project was to make the most of the default styles and functions offered by bootstrap.
 
 ## Contents
 - [Technology Stack](#technology-stack)
@@ -16,8 +19,32 @@ See [requirements.txt](https://github.com/ivankrauseza/ci-project5/blob/main/req
 - JavaScript (jQuery @3.7.1 and jQueryUI @ 1.13.2)
 - Database (AWS - RDS)
 - Media (AWS - S3)
+- Stripe Checkout
 - Icons FontAwesome @latest
 - Markdown (ReadMe)
+
+## User Experience (MVP)
+ Taking inspiration from a previous role. I wanted to develop an updated/simple/cleaner e-commerce experience. I have also taken inspiration from IKEA to simplify the display and draw attention to the products right away and reduce distraction. Overall it is a standard e-commerce website that contains traditional user flow of Product List / Product Detail / Basket / Checkout. They also have the tools to views previous orders and manage their account.
+
+ ### Customers: Logged in users VS logged out users
+- I have allowed anyone to view the products, however a logged out user CANNOT add any product to the basket.
+- To add a product to the basket the user needs to sign up (also needed for stripe id to be created).
+- Logged in user can order, pay and view previous orders.
+
+ ### Checkout
+ I have used Stripe Checkout and Webhook to manage the Checkout process so there was no need to create a custom checkout view. When the user creates there Cadence account, they are assigned a stripe id so that their account and stripe id are already linked. This means that any purchases they make are linked via the stripe id.
+
+### Staff: Logged in
+- Staff are able to login and view the website as a regular customer, but they also have additional tools.
+- They can Manage Products and Orders.
+- Shortcut to edit all products from the product list page.
+- Shortcut links to edit a product while viewing the product detail.
+
+## Database Schema
+![https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/database_shema.jpg](https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/database_shema.jpg)
+
+## User Stories
+
 
 ## Setup
 ### Clone Github Repo
@@ -74,8 +101,8 @@ Setup templates/base.html, and shop/templates/shop_index.html with basic info to
 ### Manual Testing
 Manual testing was performed to validate that the Authentication and the E-commerce system function correctly.
 
-## Core Functionality
-### Shop
+### Core Functionality
+#### Shop
 - Can all products be viewed in list format - Yes = Pass
 - Can a user filter products by collection - Yes = Pass
 - Can a user sort the product list by price (asc and desc) - Yes = Pass
@@ -87,18 +114,23 @@ Manual testing was performed to validate that the Authentication and the E-comme
 - Can a user delete a basket item from Basket page - Yes = Pass
 - Can a user Pay for an order without a delivery address - No = Pass
 - Can a user Pay for an order with a valid delivery address - Yes = Pass
-- Basket
-- Checkout
 - Can I Search products - No = Fail
 
-### Account
-- Update Account information
-- View order history and detail
-- Delete Account
+### Accounts (General users / Staff / Superusers)
+- Can a any user other than a superuser access the backened - No = Pass
+- Can a general user create an account - Yes = Pass
+- Can a general user edit an account - Yes = Pass
+- Can a general user delete an account - Yes = Pass
+- Can a general user see previous orders if existing - Yes = Pass
+- Can a general user see admin/dashboard areas - No = Pass
+- Can a general user make themselves a staff member - No = Pass
+- Can a staff member see admin/dashboard areas - Yes = Pass
+- Can a staff member manage products and orders if existing - Yes = Pass
 
-### Admin Dashboard
-- CRUD Products
-- View All orders
+### Admin Backened
+- CRUD Products and Collections - Yes = Pass
+- CRUD Users - Yes = Pass
+- View All orders - Yes = Pass
 
 ### General Pages
 - About us
@@ -117,7 +149,8 @@ To do...
 I have tested my code using https://www.pythonchecker.com/ and there are some issues where the errors refer to spacing around operators. Example: ('/') where it has recommended that I put a space around the operator like (' / ') which obviously breaks the path. I also received errors where the indentation should be 4 spaces but VS Code is tabbing the indentations but the code works fine according to the VSCode linter.  
 
 #### Lighthouse
-Overall, the Lighthouse test performed reasonably ok, across all pages.
+Overall, the Lighthouse test performed reasonably ok, across all pages.  
+![https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/lighthouse.jpg](https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/lighthouse.jpg)
 
 
 ## Bugs
