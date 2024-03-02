@@ -3,6 +3,9 @@ For my Project 5 at the Code Institute I have created an e-commerce platform for
 
 ## Contents
 - [Technology Stack](#technology-stack)
+- [User Experience](#user-experience)
+- [Database Schema](#database-schema)
+- [User Stories](#user-stories)
 - [Setup](#setup)
 - [Functionality](#functionality)
 - [Deployment](#deployment)
@@ -22,6 +25,10 @@ See [requirements.txt](https://github.com/ivankrauseza/ci-project5/blob/main/req
 
 ## User Experience (MVP)
  Taking inspiration from a previous role. I wanted to develop an updated/simple/cleaner e-commerce experience. I have also taken inspiration from IKEA to simplify the display and draw attention to the products right away and reduce distraction. Overall it is a standard e-commerce website that contains traditional user flow of Product List / Product Detail / Basket / Checkout. They also have the tools to views previous orders and manage their account.
+
+ ### Wireframes and Mockups
+ ![https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/figma_wireframes.jpg](https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/figma_wireframes.jpg)  
+ ![https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/figma_mockups.jpg](https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/figma_mockups.jpg)
 
  ### Customers: Logged in users VS logged out users
 - I have allowed anyone to view the products, however a logged out user CANNOT add any product to the basket.
