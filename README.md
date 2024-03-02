@@ -1,8 +1,5 @@
 # ci-project5 - Cadence Tools
-For my Project 5 at the Code Institute I have created 
-
-## Objective
-The main aim of this project was to make the most of the default styles and functions offered by bootstrap.
+For my Project 5 at the Code Institute I have created an e-commerce platform for a brand called Cadence Tools which sells high quality hand and power tools. The main aim of this project was to make the most of the default styles and functions offered by bootstrap.
 
 ## Contents
 - [Technology Stack](#technology-stack)
@@ -41,10 +38,12 @@ See [requirements.txt](https://github.com/ivankrauseza/ci-project5/blob/main/req
 - Shortcut links to edit a product while viewing the product detail.
 
 ## Database Schema
+Using experience gained working in MS365 Dynamics NAV, I tried to replicate the database schema in it's simplest form to also structure the project in such a way that if it needed to be integrated into an ERP system that it would follow a similar approach.
 ![https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/database_shema.jpg](https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/database_shema.jpg)
 
 ## User Stories
-
+User Stories managed through ASANA as I am more comfortable using it over GitHub Issues.
+![https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/user_stories.jpg](https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/user_stories.jpg)
 
 ## Setup
 ### Clone Github Repo
