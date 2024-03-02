@@ -1,4 +1,5 @@
 from django.core.files.storage import default_storage
+from django.contrib import messages
 
 import stripe #stripe
 from django.conf import settings # stripe
@@ -63,7 +64,7 @@ def ProductDetail(request, sku):
         ).exists()
     else:
         product_in_basket = False
-    
+
     image = product.files.first()
 
     if request.method == 'POST':
@@ -80,7 +81,8 @@ def ProductDetail(request, sku):
                 price=product.price,
                 type="B"
             )
-            return redirect('product_detail', sku=sku)
+        messages.info(request, 'Item Added to Basket')
+        return redirect('product_detail', sku=sku)
     else:
         form = AddToBasketForm(max_quantity)
 
@@ -185,7 +187,7 @@ def DeleteBasketItem(request, basket_item_id):
 
     # Perform the deletion
     basket_item.delete()
-
+    messages.warning(request, 'Item deleted from Basket!')
     return redirect('shop_basket')
 
 @login_required
@@ -198,23 +200,23 @@ def update_basket_item(request, basket_item_id):
         # Update the quantity
         basket_item.qty = max(new_quantity, 1)
         basket_item.save()
-
+    messages.success(request, 'Basket Updated')
     return redirect('shop_basket')
 
 
-# Shop checkout :
+# Shop checkout : - Not used
 @login_required
 def ShopCheckout(request):
     return render(request, 'shop_checkout.html')
 
 
-# Shop checkout :
+# Shop checkout : - Not used
 @login_required
 def ShopOrder(request):
     return render(request, 'shop_order.html')
 
 
-# Shop customer :
+# Shop customer : - Not used
 def ShopAccount(request):
     return render(request, 'shop_account.html')
 

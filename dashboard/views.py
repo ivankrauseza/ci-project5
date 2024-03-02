@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
+from django.contrib import messages
 from shop.models import Product, File, Order, Transaction
 from shop.forms import ProductCreateForm, ProductUpdateForm, FileForm
 from django.http import HttpResponseBadRequest
@@ -27,6 +28,7 @@ def DashboardProduct(request):
                 return HttpResponseBadRequest("Product with this SKU already exists.")
 
             product = form.save()
+            messages.success(request, 'Product Created!')
             return redirect('db_product_edit', sku=product.sku)
     else:
         form = ProductCreateForm()
@@ -72,12 +74,13 @@ class DashboardProductEdit(View):
             file_instance = file_form.save(commit=False)
             file_instance.product = product
             file_instance.save()
+            messages.success(request, 'Image Saved!')
             return redirect('db_product_edit', sku=product.sku)
 
         if product_form.is_valid():
             product_form.save()
+            messages.success(request, 'Product Updated!')
             return redirect('db_product_edit', sku=product.sku)
-
         return render(request, self.template_name, {
             'product_form': product_form,
             'file_form': file_form,
@@ -96,6 +99,7 @@ class FileDeleteView(View):
         file.delete()
 
         # Redirect back to the product edit page
+        messages.success(request, 'File Deleted!')
         return redirect('db_product_edit', sku=sku)
 
 
@@ -105,6 +109,7 @@ def DashboardProductDelete(request, pk):
 
     if request.method == 'POST':
         product.delete()
+        messages.success(request, 'Product Deleted!')
         return redirect('db_products')
 
     return render(request, 'db_product_delete.html')

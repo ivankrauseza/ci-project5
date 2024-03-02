@@ -1,6 +1,7 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django import forms
 from .models import Product, OrderDeliveryAddress, File
+from django.contrib import messages
 
 
 class FileForm(forms.ModelForm):
@@ -11,14 +12,10 @@ class FileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(FileForm, self).__init__(*args, **kwargs)
 
-        # Customize the file input widget
-        self.fields['file'].widget.attrs['accept'] = 'image/*'  # Specify accepted file types (e.g., images)
+        self.fields['file'].widget.attrs['accept'] = 'image/*'
 
     def clean_file(self):
         file = self.cleaned_data['file']
-
-        # You can perform additional validation on the file if needed
-        # For example, check the file type, size, etc.
 
         return file
 
