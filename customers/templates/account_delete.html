@@ -8,6 +8,12 @@
         <div class="col-12">
             <h1>Account</h1>
             <h2>Delete</h2>
+            <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+
+            <form method="post" action="{% url 'account_delete_confirm' %}">
+                {% csrf_token %}
+                <input type="submit" value="Delete Account">
+            </form>
         </div>
     </div>
 </div>

@@ -98,7 +98,7 @@ class File(models.Model):
 # end 4.
 
 
-# Basket :
+# Basket : - Not used anymore
 class Basket(models.Model):
 
     class Meta:

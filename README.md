@@ -171,6 +171,12 @@ I do not understand the built in Sitemap generator yet so I used an external gen
 ### Stripe Webhook
 I am not sure the Webhook url configuration is 100% reliable and if my config is correct but payments seem to process.
 
+### Password reset
+The password reset form is not working an results in a 500 error.
+
+### Delete Account
+Once a user has placed an order, the delete account function does not work.
+
 ## Deployment
 ### Deployment to Heroku
 - Create Procfile (web: gunicorn cadence.wsgi)

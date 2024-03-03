@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
-from shop.models import Order, StripeCustomer, Transaction
+from django.shortcuts import render, redirect, get_object_or_404
+from shop.models import Order, StripeCustomer, Transaction, User
+from django.http import HttpResponse
 
 from django.contrib.auth.decorators import login_required
 
@@ -20,6 +21,23 @@ def AccountUpdate(request):
 @login_required
 def AccountDelete(request):
     return render(request, "account_delete.html")
+
+
+@login_required
+def AccountDeleteConfirm(request):
+    try:
+        # Retrieve the user associated with the current request
+        user = User.objects.get(pk=request.user.pk)
+
+        # Delete the user
+        user.delete()
+
+        # Redirect to a success page or home page after deletion
+        return redirect('shop_index')
+    except User.DoesNotExist:
+        # In case the user does not exist, though this is unlikely
+        # since the user is logged in
+        return HttpResponse("User does not exist.", status=404)
 
 
 # Account update :
