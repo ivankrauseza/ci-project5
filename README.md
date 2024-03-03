@@ -176,6 +176,7 @@ The password reset form is not working an results in a 500 error.
 
 ### Delete Account
 Once a user has placed an order, the delete account function does not work.
+FIXED: Change to Transaction model User object.
 
 ## Deployment
 ### Deployment to Heroku

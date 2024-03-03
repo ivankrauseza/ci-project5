@@ -98,7 +98,7 @@ class File(models.Model):
 # end 4.
 
 
-# Basket : - Not used anymore
+# Basket : - Old version...see Transaction Model
 class Basket(models.Model):
 
     class Meta:
@@ -139,7 +139,7 @@ class Transaction(models.Model):
         ('P', 'Stock Purchase'),
     ]
     type = models.CharField(max_length=1, choices=TYPE_CHOICES, default="D")
-    user = models.ForeignKey(User, on_delete=models.SET_DEFAULT, default=None)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     product = models.ForeignKey(Product, on_delete=models.SET_DEFAULT, default=None)
     sku = models.CharField(max_length=255)
     sid = models.CharField(max_length=120, null=True)
