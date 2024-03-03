@@ -1,5 +1,7 @@
 # ci-project5 - Cadence Tools
-For my Project 5 at the Code Institute I have created an e-commerce platform for a brand called Cadence Tools which sells high quality hand and power tools. The main aim of this project was to make the most of the default styles and functions offered by bootstrap.
+For my Project 5 at the Code Institute I have created an e-commerce platform for a brand called Cadence Tools which sells high quality hand and power tools. The platform is integrated with Stripe Checkout, and using AWS for database and file storage. The main aim of this project was to make the most of the default styles and functions offered by bootstrap.
+
+![https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/responsive.jpg](https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/responsive.jpg)
 
 ## Contents
 - [Technology Stack](#technology-stack)
@@ -24,7 +26,7 @@ See [requirements.txt](https://github.com/ivankrauseza/ci-project5/blob/main/req
 - Markdown (ReadMe)
 
 ## User Experience (MVP)
- Taking inspiration from a previous role. I wanted to develop an updated/simple/cleaner e-commerce experience. I have also taken inspiration from IKEA to simplify the display and draw attention to the products right away and reduce distraction. Overall it is a standard e-commerce website that contains traditional user flow of Product List / Product Detail / Basket / Checkout. They also have the tools to views previous orders and manage their account.
+ Taking inspiration from a previous role. I wanted to develop an updated, simple and cleaner e-commerce experience. I have also taken inspiration from IKEA to simplify the display and draw attention to the products right away and reduce distraction. Overall it is a standard e-commerce website that contains traditional user flow of Product List / Product Detail / Basket / Checkout but the User needs to register their account in order to add products to the basket. Users also have the basic tools to view previous orders and manage their account.
 
  ### Wireframes and Mockups
  ![https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/figma_wireframes.jpg](https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/figma_wireframes.jpg)  
@@ -163,7 +165,11 @@ Overall, the Lighthouse test performed reasonably ok, across all pages.
 
 
 ## Bugs
-I do not understand the built in Sitemap generator yet so I used an external generator.
+### Sitemap
+I do not understand the built in Sitemap generator yet so I used an external generator.  
+
+### Stripe Webhook
+I am not sure the Webhook url configuration is 100% reliable and if my config is correct but payments seem to process.
 
 ## Deployment
 ### Deployment to Heroku
