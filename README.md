@@ -1,5 +1,5 @@
 # ci-project5 - Cadence Tools
-For my Project 5 at the Code Institute I have created an e-commerce platform for a brand called Cadence Tools which sells high quality hand and power tools. The platform is integrated with Stripe Checkout, and using AWS for database and file storage. The main aim of this project was to make the most of the default styles and functions offered by bootstrap.
+For my Project 5 at the Code Institute I have created an MVP e-commerce platform for a brand called Cadence Tools which sells high quality hand and power tools. The platform is integrated with Stripe Checkout, and using AWS for database and file storage. The main aim of this project was to make the most of the default styles and functions offered by bootstrap.
 
 ![https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/responsive.jpg](https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/readme/responsive.jpg)
 
