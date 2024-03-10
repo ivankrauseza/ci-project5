@@ -2,6 +2,7 @@ body {
   margin: 0;
   background-color: #333;
   font-size: 14px;
+  box-sizing: border-box;
 }
 body a {
   text-decoration: none;
@@ -36,22 +37,50 @@ body h1 {
   background-color: #5D3FD3;
 }
 
+.btn {
+  border: none !important;
+}
+
+.btn:focus,
+.btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 header#hdr {
+  display: block;
+  height: 64px;
+  padding: 0 8px;
   background: rgb(223, 0, 41);
-  background: linear-gradient(90deg, rgb(223, 0, 41) 0%, rgb(131, 29, 29) 100%);
+}
+header#hdr .btn {
+  display: inline-block;
+  height: 64px;
+  line-height: 64px;
+  padding: 0 8px;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+}
+header#hdr .btn img {
+  float: left;
+  margin: 16px 0;
+}
+header#hdr .btn svg {
+  width: auto;
+  height: 32px;
 }
 
 main {
-  background-color: #fff;
+  background-color: rgb(255, 255, 255);
   min-height: 90vh;
 }
 main a {
-  color: #DF0029;
+  color: rgb(223, 0, 41);
 }
 
 .errorlist {
   list-style: circle;
-  color: #DF0029;
+  color: rgb(223, 0, 41);
   font-size: 12px;
   margin: 16px;
 }
@@ -106,7 +135,7 @@ table.order tbody tr:hover {
 .summary {
   border-radius: 8px;
   padding: 16px;
-  background-color: #fff;
+  background-color: rgb(255, 255, 255);
   border-top: solid 4px #eee;
 }
 .summary h6 {
@@ -143,7 +172,7 @@ form textarea {
   line-height: 125%;
 }
 .card .card-footer {
-  color: #DF0029;
+  color: rgb(223, 0, 41);
 }
 .card .card-footer .price {
   text-transform: uppercase;
@@ -154,7 +183,7 @@ form textarea {
 .edit_product {
   display: inline-block;
   background-color: #5D3FD3;
-  color: #fff;
+  color: rgb(255, 255, 255);
   font-size: 12px;
   width: auto;
   height: 24px;
@@ -192,14 +221,14 @@ form textarea {
 footer {
   font-size: 12px;
   line-height: 125%;
-  border-top: solid 4px #DF0029;
+  border-top: solid 4px rgb(223, 0, 41);
   background-color: #333;
-  color: #fff;
+  color: rgb(255, 255, 255);
 }
 footer .social_icon a {
   opacity: 0.8;
   font-size: 2.5em;
-  color: #fff;
+  color: rgb(255, 255, 255);
 }
 footer .social_icon a:hover {
   opacity: 1;
@@ -218,7 +247,7 @@ footer .footer_menu .footer_nav {
   max-width: 480px;
 }
 footer .footer_menu a {
-  color: #fff;
+  color: rgb(255, 255, 255);
   opacity: 0.75;
   text-transform: uppercase;
   letter-spacing: 1px;
