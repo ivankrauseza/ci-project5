@@ -1,4 +1,5 @@
-$red:  rgba(223, 0, 41, 1);
+$red:  rgba(255, 7, 37, 1);
+$grey:  rgba(30, 36, 48, 1);
 $white:  rgba(255, 255, 255, 1);
 
 body {
@@ -39,10 +40,6 @@ body {
     }
 }
 
-.logged_in_staff {
-    background-color: #5D3FD3;
-}
-
 // Bootstrap Overrides :
 .btn {
     border:none!important;
@@ -75,6 +72,67 @@ header#hdr {
             height: 32px;
         }
     }
+}
+
+// NAVIGATION :
+.main-navigation {
+    .offcanvas-header {
+        height: 64px;
+        background-color: $red;
+        color:$white;
+        .btn-close {
+            color:$white;
+        }
+    }
+    .offcanvas-body {
+        background-color: $grey;
+        color:$white;
+        a, button {
+            color:$white;
+            opacity: 0.9;
+            i {
+                margin-right: 8px;
+            }
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.session-navigation {
+    .offcanvas-header {
+        height: 64px;
+        background-color: $red;
+        color:$white;
+        .btn-close {
+            color:$white;
+        }
+    }
+    .offcanvas-body {
+        background-color: $grey;
+        color:$white;
+        a, button {
+            color:$white;
+            opacity: 0.9;
+            i {
+                margin-right: 8px;
+            }
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+
+
+.logged_in_staff {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #5D3FD3;
 }
 
 main {

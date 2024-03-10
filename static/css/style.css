@@ -33,10 +33,6 @@ body h1 {
   letter-spacing: 1px;
 }
 
-.logged_in_staff {
-  background-color: #5D3FD3;
-}
-
 .btn {
   border: none !important;
 }
@@ -51,7 +47,7 @@ header#hdr {
   display: block;
   height: 64px;
   padding: 0 8px;
-  background: rgb(223, 0, 41);
+  background: rgb(255, 7, 37);
 }
 header#hdr .btn {
   display: inline-block;
@@ -70,17 +66,71 @@ header#hdr .btn svg {
   height: 32px;
 }
 
+.main-navigation .offcanvas-header {
+  height: 64px;
+  background-color: rgb(255, 7, 37);
+  color: rgb(255, 255, 255);
+}
+.main-navigation .offcanvas-header .btn-close {
+  color: rgb(255, 255, 255);
+}
+.main-navigation .offcanvas-body {
+  background-color: rgb(30, 36, 48);
+  color: rgb(255, 255, 255);
+}
+.main-navigation .offcanvas-body a, .main-navigation .offcanvas-body button {
+  color: rgb(255, 255, 255);
+  opacity: 0.9;
+}
+.main-navigation .offcanvas-body a i, .main-navigation .offcanvas-body button i {
+  margin-right: 8px;
+}
+.main-navigation .offcanvas-body a:hover, .main-navigation .offcanvas-body button:hover {
+  opacity: 1;
+}
+
+.session-navigation .offcanvas-header {
+  height: 64px;
+  background-color: rgb(255, 7, 37);
+  color: rgb(255, 255, 255);
+}
+.session-navigation .offcanvas-header .btn-close {
+  color: rgb(255, 255, 255);
+}
+.session-navigation .offcanvas-body {
+  background-color: rgb(30, 36, 48);
+  color: rgb(255, 255, 255);
+}
+.session-navigation .offcanvas-body a, .session-navigation .offcanvas-body button {
+  color: rgb(255, 255, 255);
+  opacity: 0.9;
+}
+.session-navigation .offcanvas-body a i, .session-navigation .offcanvas-body button i {
+  margin-right: 8px;
+}
+.session-navigation .offcanvas-body a:hover, .session-navigation .offcanvas-body button:hover {
+  opacity: 1;
+}
+
+.logged_in_staff {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #5D3FD3;
+}
+
 main {
   background-color: rgb(255, 255, 255);
   min-height: 90vh;
 }
 main a {
-  color: rgb(223, 0, 41);
+  color: rgb(255, 7, 37);
 }
 
 .errorlist {
   list-style: circle;
-  color: rgb(223, 0, 41);
+  color: rgb(255, 7, 37);
   font-size: 12px;
   margin: 16px;
 }
@@ -172,7 +222,7 @@ form textarea {
   line-height: 125%;
 }
 .card .card-footer {
-  color: rgb(223, 0, 41);
+  color: rgb(255, 7, 37);
 }
 .card .card-footer .price {
   text-transform: uppercase;
@@ -221,7 +271,7 @@ form textarea {
 footer {
   font-size: 12px;
   line-height: 125%;
-  border-top: solid 4px rgb(223, 0, 41);
+  border-top: solid 4px rgb(255, 7, 37);
   background-color: #333;
   color: rgb(255, 255, 255);
 }

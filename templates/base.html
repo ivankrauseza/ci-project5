@@ -22,14 +22,8 @@
     <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
-    
-    {% if user.is_authenticated and user.is_staff %}
-    <div class="logged_in_staff px-3 py-1 text-white text-center">
-        You are logged in as a Staff member
-    </div>
-    {% endif %}
 
-    <header class="container-fluid bg-danger" id="hdr">
+    <header class="container-fluid" id="hdr">
         <div class="row g-0">
             <div class="col-6 text-start my-auto">
                 <button 
@@ -149,106 +143,117 @@
     </footer>
 
     <!--DEFAULT NAVIGATION-->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasLeft" aria-labelledby="offcanvasLeftLabel">
-        <div class="offcanvas-header bg-secondary">
-            <h5 class="offcanvas-title" id="offcanvasLeftLabel">
-                <img src="https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/logo_cadence.svg" height="32" alt="Logo">
-            </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <h6>Our store</h6>
-            <ul>
-                <li>
-                    <a class="btn" href="{% url 'shop_index' %}">
-                        <i class="fa-solid fa-house"></i> Home
-                    </a>
-                </li>
-                <li>
-                    <a class="btn" href="{% url 'shop_collection_list' %}">
-                        <i class="fa-solid fa-grip"></i> Collections
-                    </a>
-                </li>
-            </ul>
-            <hr>
-            <h6>Information</h6>
-            <ul>
-                <li>
-                    <a class="btn" href="{% url 'about' %}">
-                        <i class="fa-solid fa-circle-info"></i> About Us
-                    </a>
-                </li>
-                <li>
-                    <a class="btn" href="{% url 'terms' %}">
-                        <i class="fa-solid fa-gavel"></i> Terms and Conditions
-                    </a>
-                </li>
-                <li>
-                    <a class="btn" href="{% url 'privacy' %}">
-                        <i class="fa-solid fa-shield-halved"></i> Privacy Policy
-                    </a>
-                </li>
-                <li>
-                    <a class="btn" href="{% url 'contact' %}">
-                        <i class="fa-solid fa-at"></i> Contact Us
-                    </a>
-                </li>
-            </ul>
+    <div class="main-navigation">
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasLeft" aria-labelledby="offcanvasLeftLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasLeftLabel">
+                    <img src="https://bmie23a.s3.eu-west-1.amazonaws.com/uploads/logo_cadence.svg" height="32" alt="Logo">
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <h6>Our store</h6>
+                <ul>
+                    <li>
+                        <a class="btn" href="{% url 'shop_index' %}">
+                            <i class="fa-solid fa-house"></i> Home
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn" href="{% url 'shop_collection_list' %}">
+                            <i class="fa-solid fa-grip"></i> Collections
+                        </a>
+                    </li>
+                </ul>
+                <hr>
+                <h6>Information</h6>
+                <ul>
+                    <li>
+                        <a class="btn" href="{% url 'about' %}">
+                            <i class="fa-solid fa-circle-info"></i> About Us
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn" href="{% url 'terms' %}">
+                            <i class="fa-solid fa-gavel"></i> Terms and Conditions
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn" href="{% url 'privacy' %}">
+                            <i class="fa-solid fa-shield-halved"></i> Privacy Policy
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn" href="{% url 'contact' %}">
+                            <i class="fa-solid fa-at"></i> Contact Us
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 
     <!--SESSION NAVIGATION-->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasRightLabel">
-                <i class="fa-solid fa-gear"></i> Settings
-            </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            {% if user.is_authenticated %}
-                <ul>
-                    <li>
-                        <a class="btn" href="{% url 'account_index' %}">
-                            My Account
-                        </a>
-                    </li>
-                    <li>
-                        <a class="btn" href="{% url 'account_orders' %}">
-                            My Orders
-                        </a>
-                    </li>
-                </ul>
-
-                <form method="post" action="{% url 'account_logout' %}">
-                    {% csrf_token %}
-                    <button class="btn btn-sm text-danger" type="submit">Logout</button>
-                </form>
-
-                <hr>
-
-                {% if user.is_authenticated and user.is_staff %}
+    <div class="session-navigation">
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasRightLabel">
+                    <i class="fa-solid fa-user"></i> My Account
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                {% if user.is_authenticated %}
                     <ul>
                         <li>
-                            <strong>
-                                Dashboard (logged in Admin)
-                            </strong>
-                        </li>
-                        <li>
-                            <a href="{% url 'db_products' %}">
-                                Product Manager
+                            <a class="btn" href="{% url 'account_index' %}">
+                                My Details
                             </a>
                         </li>
                         <li>
-                            <a href="{% url 'db_orders' %}">
-                                Customer Orders
+                            <a class="btn" href="{% url 'account_orders' %}">
+                                My Orders
                             </a>
                         </li>
                     </ul>
+
+                    <form method="post" action="{% url 'account_logout' %}">
+                        {% csrf_token %}
+                        <button class="btn btn-sm text-danger" type="submit">Logout</button>
+                    </form>
+
+                    <hr>
+
+                    {% if user.is_authenticated and user.is_staff %}
+                        <ul>
+                            <li>
+                                <strong>
+                                    Dashboard (logged in Admin)
+                                </strong>
+                            </li>
+                            <li>
+                                <a href="{% url 'db_products' %}">
+                                    Product Manager
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'db_orders' %}">
+                                    Customer Orders
+                                </a>
+                            </li>
+                        </ul>
+                    {% endif %}
                 {% endif %}
-            {% endif %}
+            </div>
         </div>
     </div>
+    
+    
+    {% if user.is_authenticated and user.is_staff %}
+    <div class="logged_in_staff px-3 py-1 text-white text-center">
+        You are logged in as a Staff member
+    </div>
+    {% endif %}
     
     <!--TOAST MESSAGES-->
     {% if messages %}
