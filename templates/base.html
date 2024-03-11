@@ -204,45 +204,36 @@
             </div>
             <div class="offcanvas-body">
                 {% if user.is_authenticated %}
-                    <ul>
-                        <li>
-                            <a class="btn" href="{% url 'account_index' %}">
-                                My Details
-                            </a>
-                        </li>
-                        <li>
-                            <a class="btn" href="{% url 'account_orders' %}">
-                                My Orders
-                            </a>
-                        </li>
-                    </ul>
+                <ul>
+                    <li>
+                        <a class="btn" href="{% url 'shop_basket' %}">
+                            <i class="fa-solid fa-cart-shopping"></i> My Cart
+                        </a>
+                    </li>
+                </ul>
+
+                <hr>
+
+                <ul>
+                    <li>
+                        <a class="btn" href="{% url 'account_index' %}">
+                            <i class="fa-solid fa-user"></i> My Details
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn" href="{% url 'account_orders' %}">
+                            <i class="fa-solid fa-list"></i> My Orders
+                        </a>
+                    </li>
+                </ul>
+
+                <hr>
 
                     <form method="post" action="{% url 'account_logout' %}">
                         {% csrf_token %}
-                        <button class="btn btn-sm text-danger" type="submit">Logout</button>
+                        <button class="btn btn-sm text-danger" type="submit"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
                     </form>
 
-                    <hr>
-
-                    {% if user.is_authenticated and user.is_staff %}
-                        <ul>
-                            <li>
-                                <strong>
-                                    Dashboard (logged in Admin)
-                                </strong>
-                            </li>
-                            <li>
-                                <a href="{% url 'db_products' %}">
-                                    Product Manager
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{% url 'db_orders' %}">
-                                    Customer Orders
-                                </a>
-                            </li>
-                        </ul>
-                    {% endif %}
                 {% endif %}
             </div>
         </div>
@@ -252,6 +243,9 @@
     {% if user.is_authenticated and user.is_staff %}
     <div class="logged_in_staff px-3 py-1 text-white text-center">
         You are logged in as a Staff member
+        {% if user.is_authenticated and user.is_staff %}
+            <a href="{% url 'db_products' %}">Product Manager</a> | <a href="{% url 'db_orders' %}">Customer Orders</a>
+        {% endif %}
     </div>
     {% endif %}
     

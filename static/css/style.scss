@@ -54,7 +54,7 @@ body {
 header#hdr {
     display: block;
     height: 64px;
-    padding: 0 8px;
+    padding: 0 16px;
     background: $red;
     .btn {
         display: inline-block;
@@ -72,6 +72,24 @@ header#hdr {
             height: 32px;
         }
     }
+}
+
+// HEADER > BASKET COUNT :
+.basket_count {
+    position: absolute;
+    top: 50%;
+    right: 0%;
+    transform: translate(-0%,-0%);
+    display: block;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 700;
+    background-color: green;
+    color: white;
+    border-radius: 16px;
 }
 
 // NAVIGATION :
@@ -159,22 +177,7 @@ main {
     }
 }
 
-.basket_count {
-    position: absolute;
-    top: 0%;
-    right: 0%;
-    transform: translate(-0%,-0%);
-    display: block;
-    width: 16px;
-    height: 16px;
-    line-height: 16px;
-    text-align: center;
-    font-size: 10px;
-    font-weight: 700;
-    background-color: green;
-    color: white;
-    border-radius: 16px;
-}
+
 
 table.order {
     border-bottom: solid 2px #eee;
